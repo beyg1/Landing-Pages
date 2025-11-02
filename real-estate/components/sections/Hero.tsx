@@ -13,11 +13,11 @@ export default function Hero() {
           priority
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-background" />
-        <div className="pointer-events-none absolute -top-24 left-1/2 h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-[var(--accent)]/30 blur-[120px]" />
+        <div className="absolute inset-0 bg-linear-to-b from-black/50 via-black/40 to-background" />
+        <div className="pointer-events-none absolute -top-24 left-1/2 h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-(--accent)/30 blur-[120px]" />
       </div>
 
-      <div className="mx-auto max-w-screen-xl px-6 md:px-8">
+      <div className="mx-auto max-w-7xl px-6 md:px-8">
         <div className="max-w-2xl text-white">
           <div>
             <p
@@ -27,7 +27,7 @@ export default function Hero() {
               Arcadia Real Estate
             </p>
             <h1
-              className="font-[var(--font-display)] text-4xl leading-tight tracking-tight md:text-6xl opacity-0 animate-slide-in-up"
+              className="font-(--font-display) text-4xl leading-tight tracking-tight md:text-6xl opacity-0 animate-slide-in-up"
               style={{ animationDelay: "0.2s" }}
             >
               Bespoke homes for refined living

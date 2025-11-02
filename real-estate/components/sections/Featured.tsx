@@ -1,7 +1,4 @@
-"use client";
-
 import Image from "next/image";
-import { motion } from "framer-motion";
 import Section from "@/components/ui/Section";
 import { MapPin, Bath, Bed, Square } from "lucide-react";
 
@@ -40,32 +37,28 @@ const listings = [
 
 export default function Featured() {
   return (
-    <Section id="featured" className="flex items-center bg-gradient-to-b from-transparent to-white/60 dark:to-white/5">
-      <div className="mx-auto max-w-screen-xl px-6 md:px-8">
+    <Section id="featured" className="flex items-center bg-linear-to-b from-transparent to-white/60 dark:to-white/5">
+      <div className="mx-auto max-w-7xl px-6 md:px-8">
         <div className="flex items-end justify-between gap-6">
           <div>
-            <h2 className="font-[var(--font-display)] text-3xl tracking-tight text-[var(--foreground)] md:text-4xl">Featured listings</h2>
+            <h2 className="font-(--font-display) text-3xl tracking-tight text-foreground md:text-4xl">Featured listings</h2>
             <p className="mt-3 text-base text-muted md:text-lg">Meticulously curated properties you won’t see everywhere.</p>
           </div>
         </div>
 
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {listings.map((l, i) => (
-            <motion.article
+          {listings.map((l) => (
+            <article
               key={l.title}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ delay: 0.05 + i * 0.05, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
               className="group overflow-hidden rounded-2xl border border-black/5 bg-white shadow-[0_2px_20px_rgba(0,0,0,0.04)] transition hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] dark:border-white/10 dark:bg-white/5"
             >
-              <div className="relative aspect-[4/3] overflow-hidden">
+              <div className="relative aspect-4/3 overflow-hidden">
                 <Image src={l.image} alt={l.title} fill className="object-cover transition duration-700 group-hover:scale-105" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/0" />
+                <div className="absolute inset-0 bg-linear-to-t from-black/40 via-black/0" />
                 <div className="absolute left-4 top-4 rounded-full bg-black/60 px-3 py-1 text-xs text-white backdrop-blur">{l.price}</div>
               </div>
               <div className="p-5">
-                <h3 className="text-lg font-semibold text-[var(--foreground)]">{l.title}</h3>
+                <h3 className="text-lg font-semibold text-foreground">{l.title}</h3>
                 <p className="mt-1 flex items-center gap-1 text-sm text-muted">
                   <MapPin className="h-4 w-4 opacity-70" /> {l.location}
                 </p>
@@ -75,7 +68,7 @@ export default function Featured() {
                   <span className="inline-flex items-center gap-1"><Square className="h-4 w-4" /> {l.area.toLocaleString()} sqft</span>
                 </div>
               </div>
-            </motion.article>
+            </article>
           ))}
         </div>
       </div>

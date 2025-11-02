@@ -10,10 +10,10 @@ type SectionProps = PropsWithChildren<{
 
 export default function Section({ id, className, containerClassName, width = "xl", children }: SectionProps) {
   const max = {
-    sm: "max-w-screen-sm",
-    md: "max-w-screen-md",
-    lg: "max-w-screen-lg",
-    xl: "max-w-screen-xl",
+    sm: "max-w-sm",
+    md: "max-w-md",
+    lg: "max-w-lg",
+    xl: "max-w-7xl",
   }[width];
 
   return (
