@@ -1,6 +1,6 @@
 # Build Responsive Website in React JS with Styled-Components and GSAP for awesome scroll Animations
 
-Nice Starter Project to learn GSAP needs better styling
+Nice Starter Project to learn GSAP as there is video tutorial available. also it needs better styling
 
 View Demo:
 https://agency-website-eta.vercel.app/
@@ -33,10 +33,5 @@ Avatar-2 : Photo by <a href="https://unsplash.com/@miracletwentyone?utm_source=u
 Avatar-3 : Photo by <a href="https://unsplash.com/@samburriss?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Sam Burriss</a> on <a href="https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a> <br />
 Avatar-4 : Photo by <a href="https://unsplash.com/@whereslugo?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">whereslugo</a> on <a href="https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a> <br />
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
 
 ### `npm start`

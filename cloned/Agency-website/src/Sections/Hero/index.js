@@ -56,7 +56,7 @@ const WhiteBlob = styled.div`
   width: calc(20% + 20vw);
   position: absolute;
   right: calc(3.5rem + 3.5vw);
-  top: calc(2rem + 2vw);
+  top: calc(1rem + 1vw);
   z-index: 5;
 `;
 

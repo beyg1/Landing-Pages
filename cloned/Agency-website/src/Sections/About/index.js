@@ -1,5 +1,4 @@
 import styled, { keyframes } from "styled-components";
-import wave from "../../assets/waves.svg";
 import rocket from "../../assets/rocket image.png";
 import human from "../../assets/human.svg";
 import hand from "../../assets/hand.svg";
@@ -17,13 +16,9 @@ const AboutSection = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 2rem;
 `;
-const Waves = styled.img`
-  width: 100%;
-  height: auto;
-  position: absolute;
-  top: -1rem;
-`;
+
 const Hand = styled.div`
   position: absolute;
   bottom: -1rem;
@@ -120,7 +115,6 @@ const AboutText = styled.div`
 const About = () => {
   return (
     <AboutSection id="about">
-      <Waves src={wave} alt="" />
       <Hand>
         <img src={hand} alt="" />
       </Hand>
