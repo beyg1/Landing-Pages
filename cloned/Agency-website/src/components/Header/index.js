@@ -210,13 +210,13 @@ const Header = () => {
       gsap.to(element, {
         position: "fixed",
         top: "1rem",
-        left: "3rem",
-        right: "3rem",
+        left: "20%",
+        right: "20%",
         padding: "1.5rem 2rem",
 
-        borderRadius: "50px",
+        borderRadius: "10px",
 
-        border: "3px solid var(--white)",
+        border: "2px solid var(--white)",
 
         duration: 1,
         ease: "power1.out",
