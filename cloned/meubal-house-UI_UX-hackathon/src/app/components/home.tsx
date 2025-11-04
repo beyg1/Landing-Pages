@@ -4,19 +4,43 @@ import Hero from "./hero";
 import BlogCard from "./blogCard";
 import Header from "./header";
 import Link from "next/link";
-import { client } from "@/sanity/lib/client";
 import { Product } from "./interface";
 
 async function getData() {
-  const query = `*[_type == "product"] | order( _id)[0...4] {
-  _id,
-    name,
-    price,
-    'slug': slug.current,
-    'category':category->name, 
-    'imageUrl': image[0].asset->url
-}`;
-  const data = await client.fetch(query);
+  const data: Product[] = [
+    {
+      _id: "1",
+      name: "Lorem Ipsum Dolor Sit Amet",
+      price: 100,
+      slug: "lorem-ipsum-dolor-sit-amet",
+      category: "Category 1",
+      imageUrl: "/pro1.png",
+    },
+    {
+      _id: "2",
+      name: "Consectetur Adipiscing Elit",
+      price: 200,
+      slug: "consectetur-adipiscing-elit",
+      category: "Category 2",
+      imageUrl: "/pro2.png",
+    },
+    {
+      _id: "3",
+      name: "Sed Do Eiusmod Tempor Incididunt",
+      price: 300,
+      slug: "sed-do-eiusmod-tempor-incididunt",
+      category: "Category 3",
+      imageUrl: "/pro3.png",
+    },
+    {
+      _id: "4",
+      name: "Ut Labore Et Dolore Magna Aliqua",
+      price: 400,
+      slug: "ut-labore-et-dolore-magna-aliqua",
+      category: "Category 4",
+      imageUrl: "/pro4.png",
+    },
+  ];
   return data;
 }
 

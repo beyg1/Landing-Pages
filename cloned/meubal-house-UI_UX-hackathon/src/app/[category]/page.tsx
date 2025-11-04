@@ -1,4 +1,3 @@
-import { client } from "@/sanity/lib/client";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -7,17 +6,17 @@ import Header from "../components/header";
 import PageToper from "../components/PageToper";
 
 async function getData(category: string) {
-  const query = ` *[_type == "product" && category->name == '${category}']{
-  _id,
-    price,
-    name,
-    'imageUrl': image[0].asset->url,
-    "slug": slug.current,
-    'category': category->name
-}`;
-  const data = await client.fetch(query);
+  const data: Product[] = Array.from({ length: 4 }, (_, i) => ({
+    _id: `${i + 1}`,
+    name: `Lorem Ipsum Dolor Sit Amet ${i + 1}`,
+    price: (i + 1) * 100,
+    slug: `lorem-ipsum-dolor-sit-amet-${i + 1}`,
+    category: category,
+    imageUrl: `/pro${(i % 12) + 5}.png`,
+  }));
   return data;
 }
+
 
 const CategoryPage = async ({ params }: { params: { category: string } }) => {
   const data: Product[] = await getData(params.category);

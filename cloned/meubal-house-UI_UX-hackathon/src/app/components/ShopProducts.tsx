@@ -1,20 +1,17 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { client } from "@/sanity/lib/client";
 import { Product } from "./interface";
 
 export async function getData() {
-  const query = `*[_type == "product"][0...20] {
-  _id,
-    price,
-    name,
-    "imageUrl": image[0].asset->url,
-    "slug": slug.current,
-    "category": category->name
-}`;
-
-  const data = await client.fetch(query);
+  const data: Product[] = Array.from({ length: 20 }, (_, i) => ({
+    _id: `${i + 1}`,
+    name: `Lorem Ipsum Dolor Sit Amet ${i + 1}`,
+    price: (i + 1) * 100,
+    slug: `lorem-ipsum-dolor-sit-amet-${i + 1}`,
+    category: `Category ${i + 1}`,
+    imageUrl: `/pro${(i % 12) + 1}.png`,
+  }));
   return data;
 }
 

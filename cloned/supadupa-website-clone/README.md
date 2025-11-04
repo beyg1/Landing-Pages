@@ -8,6 +8,4 @@
 ✅ Framer Motion
 ✅ Lenis Scroll
 
-## Preview
-
-![Editing supadupa-website-clone_README md at master · devwithzain_supadupa-website-clone and 1 more page - Personal - Microsoft​ Edge 10_13_2024 10_07_11 PM](https://github.com/user-attachments/assets/be079280-7cf8-4c66-b0b9-c5f50e030c9d)
+Note: This Lp clearly deleivers it's message with text. style is pretty good at conveying any message

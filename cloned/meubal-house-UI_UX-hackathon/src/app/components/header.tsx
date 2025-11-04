@@ -6,13 +6,9 @@ import Image from "next/image";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import MenuModel from "./MenuModel";
 import CategoryModel from "./CategoryModel";
-import { useShoppingCart } from "use-shopping-cart";
 import SearchModel from "./SearchModel";
-import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 
 const Header = (props: { bgcolor: string }) => {
-  const { handleCartClick, cartCount } = useShoppingCart();
-
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
 
   return (
@@ -47,21 +43,13 @@ const Header = (props: { bgcolor: string }) => {
               <SearchModel />
             </div>
           </div>
-          <div className="relative" onClick={() => handleCartClick()}>
+          <div className="relative">
             <div>
-              <div className="flex items-center justify-center absolute w-[16px] h-[16px] -top-1 -right-1 rounded-full text-white text-[12px] bg-red-500 cursor-pointer">
-                <span>{cartCount}</span>
-              </div>
               <AiOutlineShoppingCart size={25} cursor={"pointer"} />
             </div>
           </div>
           <div>
-            <SignedOut>
-              <SignInButton />
-            </SignedOut>
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
+            <button>Sign In</button>
           </div>
         </div>
       </div>
@@ -91,21 +79,13 @@ const Header = (props: { bgcolor: string }) => {
         <div>
           <SearchModel />
         </div>
-        <div className="relative" onClick={() => handleCartClick()}>
+        <div className="relative">
           <div>
-            <div className="flex items-center justify-center absolute w-[16px] h-[16px] -top-1 right-[-0.50rem] rounded-full text-white text-[12px] bg-red-500 cursor-pointer">
-              <span>{cartCount}</span>
-            </div>
             <AiOutlineShoppingCart size={25} cursor={"pointer"} />
           </div>
         </div>
         <div>
-          <SignedOut>
-            <SignInButton />
-          </SignedOut>
-          <SignedIn>
-            <UserButton />
-          </SignedIn>
+          <button>Sign In</button>
         </div>
       </div>
     </div>

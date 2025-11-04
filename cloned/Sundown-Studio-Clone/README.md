@@ -2,13 +2,10 @@
 
 This is the clone website of Sundown Studio coded by 
 
-## Authors
-
-- [@Muhammad Dawood Iqbal](https://github.com/DawoodIqbal04)
 
 # Stack And Technology Used
 
-
+Vanilla JS
 - HTML
 - CSS
 - JavaScript
@@ -17,9 +14,3 @@ This is the clone website of Sundown Studio coded by
 
 # EXPERIENCE THE WEBSITE 
 
-## Sundown Studio Clone
-
- https://sundown-studio-clone-two.vercel.app/
-## Sundown Studio Orignal
-
- https://sundownstudio.webflow.io/

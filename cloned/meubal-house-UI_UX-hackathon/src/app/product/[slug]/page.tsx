@@ -7,7 +7,6 @@ import { FaFacebook } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
 import Header from "@/app/components/header";
 import SingleProductBottom from "@/app/components/SingleProductBottom";
-import { client } from "@/sanity/lib/client";
 import { Products } from "@/app/components/interface";
 import ImageGallery from "@/app/components/ImageGallery";
 import AddToCart from "@/app/components/AddToCart";
@@ -15,20 +14,17 @@ import CheckoutNow from "@/app/components/CheckoutNow";
 import SPB from "@/app/components/SingleProductBreadcrumb";
 
 async function getData(slug: string) {
-  const query = `*[_type == "product" && slug.current == '${slug}'][0]{
-  _id,
-    price,
-    name,
-    image,
-    description,
-    "slug": slug.current,
-    "category": category->name,
-    stock,
-    price_id,
-}`;
-
-  const product = await client.fetch(query);
-
+  const product: Products = {
+    _id: "1",
+    price: 100,
+    name: "Lorem Ipsum Dolor Sit Amet",
+    image: ["/pro1.png", "/pro2.png", "/pro3.png", "/pro4.png"],
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    slug: "lorem-ipsum-dolor-sit-amet",
+    category: "Category 1",
+    stock: 10,
+    price_id: "price_12345",
+  };
   return product;
 }
 

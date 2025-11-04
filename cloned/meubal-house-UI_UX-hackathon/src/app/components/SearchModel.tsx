@@ -3,7 +3,6 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { IoSearchOutline } from "react-icons/io5";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { client } from "@/sanity/lib/client";
 import Link from "next/link";
 import Image from "next/image";
 import { Product } from "./interface";
@@ -19,14 +18,40 @@ const SearchModel = () => {
   useEffect(() => {
     async function getData() {
       try {
-        const data = await client.fetch(`*[_type == "product"][0...20] {
-  _id,
-    price,
-    name,
-    "imageUrl": image[0].asset->url,
-    "slug": slug.current,
-    "category": category->name
-}`);
+        const data: Product[] = [
+          {
+            _id: "1",
+            name: "Lorem Ipsum Dolor Sit Amet",
+            price: 100,
+            slug: "lorem-ipsum-dolor-sit-amet",
+            category: "Category 1",
+            imageUrl: "/pro1.png",
+          },
+          {
+            _id: "2",
+            name: "Consectetur Adipiscing Elit",
+            price: 200,
+            slug: "consectetur-adipiscing-elit",
+            category: "Category 2",
+            imageUrl: "/pro2.png",
+          },
+          {
+            _id: "3",
+            name: "Sed Do Eiusmod Tempor Incididunt",
+            price: 300,
+            slug: "sed-do-eiusmod-tempor-incididunt",
+            category: "Category 3",
+            imageUrl: "/pro3.png",
+          },
+          {
+            _id: "4",
+            name: "Ut Labore Et Dolore Magna Aliqua",
+            price: 400,
+            slug: "ut-labore-et-dolore-magna-aliqua",
+            category: "Category 4",
+            imageUrl: "/pro4.png",
+          },
+        ];
         setProducts(data);
         setFilterProducts(data);
       } catch (error) {

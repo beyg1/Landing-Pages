@@ -24,10 +24,5 @@ Live site: [https://inspirusagency.vercel.app](https://inspirusagency.vercel.app
 - Contact/CTA section
 - Built for speed and efficiency 
 
-## Contributing
 
-Contributions are welcome! Feel free to open issues or submit a pull request.
-
-## License
-
-This project is licensed under the MIT License.
+Sleek design and scroll animations can be improved

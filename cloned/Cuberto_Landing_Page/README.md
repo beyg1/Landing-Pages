@@ -3,6 +3,8 @@
 A modern, clean, and animated landing page inspired by Cuberto.com.
 Built with Next.js, TypeScript, Tailwind CSS, GSAP, and Lenis Smooth Scroll to recreate smooth transitions and delightful interactions.
 
+Pretty cool Colours but it plays with video assets to deliever a full punch
+
 
 🔗 Live Demo: [Visit live site here](https://cuberto-clone-one-chi.vercel.app/)
 
