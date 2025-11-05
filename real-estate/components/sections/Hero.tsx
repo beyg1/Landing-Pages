@@ -4,7 +4,7 @@ import Section from "@/components/ui/Section";
 
 export default function Hero() {
   return (
-    <Section className="flex items-center">
+    <Section width="full" height="screen" className="flex items-center">
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <Image
           src="https://images.unsplash.com/photo-1501183638710-841dd1904471?q=80&w=1920&auto=format&fit=crop"
@@ -13,61 +13,78 @@ export default function Hero() {
           priority
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-linear-to-b from-black/50 via-black/40 to-background" />
-        <div className="pointer-events-none absolute -top-24 left-1/2 h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-(--accent)/30 blur-[120px]" />
+        <div className="absolute inset-0 bg-linear-to-r from-black/80 via-black/60 to-transparent" />
+        <div className="pointer-events-none absolute -top-40 right-20 h-[500px] w-[500px] rounded-full bg-(--accent)/20 blur-[100px]" />
       </div>
 
-      <div className="mx-auto max-w-7xl px-6 md:px-8">
-        <div className="max-w-2xl text-white">
-          <div>
-            <p
-              className="mb-4 inline-block rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm backdrop-blur-sm opacity-0 animate-slide-in-up"
-              style={{ animationDelay: "0.1s" }}
-            >
-              Arcadia Real Estate
-            </p>
-            <h1
-              className="font-(--font-display) text-4xl leading-tight tracking-tight md:text-6xl opacity-0 animate-slide-in-up"
-              style={{ animationDelay: "0.2s" }}
-            >
-              Bespoke homes for refined living
-            </h1>
-            <p
-              className="mt-5 max-w-xl text-base/7 text-white/80 md:text-lg/8 opacity-0 animate-slide-in-up"
-              style={{ animationDelay: "0.3s" }}
-            >
-              Discover hand‑picked properties and a concierge‑style experience, tailored to how you want to buy or sell.
-            </p>
-            <div
-              className="mt-8 flex flex-wrap gap-3 opacity-0 animate-slide-in-up"
-              style={{ animationDelay: "0.4s" }}
-            >
-              <LinkButton href="#featured" className="shadow-xl">Browse listings</LinkButton>
-              <LinkButton href="#cta" variant="secondary">Book a consultation</LinkButton>
-            </div>
+      <div className="w-full">
+        <div className="ml-auto max-w-3xl px-6 md:px-8">
+          <div className="text-right text-white">
+            <div className="space-y-8">
+              <div
+                className="inline-block rounded-full border border-white/20 bg-white/10 px-6 py-3 text-base font-medium backdrop-blur-sm opacity-0 animate-slide-in-up"
+                style={{ animationDelay: "0.1s" }}
+              >
+                <span className="text-accent font-semibold">EST. 2009</span> • Arcadia
+              </div>
+              
+              <div className="space-y-6">
+                <h1
+                  className="font-(--font-display) text-5xl md:text-7xl lg:text-8xl leading-none tracking-tighter opacity-0 animate-slide-in-up"
+                  style={{ animationDelay: "0.2s" }}
+                >
+                  <span className="text-white">Bespoke</span>
+                  <br />
+                  <span className="text-accent">Homes</span>
+                  <span className="text-white"> for</span>
+                  <br />
+                  <span className="text-white">Refined</span>
+                  <span className="text-accent"> Living</span>
+                </h1>
+                
+                <p
+                  className="text-lg md:text-xl text-white/90 max-w-xl opacity-0 animate-slide-in-up"
+                  style={{ animationDelay: "0.3s" }}
+                >
+                  Exclusive properties curated for the most discerning clients, with unparalleled service and attention to detail.
+                </p>
+              </div>
+              
+              <div
+                className="flex flex-wrap gap-5 opacity-0 animate-slide-in-up"
+                style={{ animationDelay: "0.4s" }}
+              >
+                <LinkButton href="#featured" className="px-9 py-4 text-base font-medium shadow-2xl">
+                  View Collection
+                </LinkButton>
+                <LinkButton href="#cta" variant="secondary" className="px-9 py-4 text-base font-medium">
+                  Exclusive Access
+                </LinkButton>
+              </div>
 
-            <dl
-              className="mt-10 grid max-w-xl grid-cols-3 gap-6 text-sm/6 text-white/80 opacity-0 animate-slide-in-up"
-              style={{ animationDelay: "0.5s" }}
-            >
-              <div>
-                <dt className="text-white">15+ years</dt>
-                <dd className="text-white/70">of neighborhood expertise</dd>
+              <div
+                className="flex flex-wrap gap-8 pt-8 border-t border-white/10 opacity-0 animate-slide-in-up"
+                style={{ animationDelay: "0.5s" }}
+              >
+                <div>
+                  <dt className="text-3xl font-bold text-accent">15+ Years</dt>
+                  <dd className="mt-2 text-sm text-white/70">of Excellence</dd>
+                </div>
+                <div>
+                  <dt className="text-3xl font-bold text-accent">98%</dt>
+                  <dd className="mt-2 text-sm text-white/70">Satisfaction</dd>
+                </div>
+                <div>
+                  <dt className="text-3xl font-bold text-accent">200+</dt>
+                  <dd className="mt-2 text-sm text-white/70">Homes Sold</dd>
+                </div>
               </div>
-              <div>
-                <dt className="text-white">98% satisfaction</dt>
-                <dd className="text-white/70">client‑rated service</dd>
-              </div>
-              <div>
-                <dt className="text-white">200+ homes</dt>
-                <dd className="text-white/70">sold and counting</dd>
-              </div>
-            </dl>
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="pointer-events-none absolute bottom-6 left-1/2 hidden -translate-x-1/2 md:block">
+      <div className="pointer-events-none absolute bottom-6 right-6 hidden md:block">
         <div className="h-10 w-6 rounded-full border-2 border-white/60 p-1">
           <div className="h-full w-full animate-bounce rounded-full bg-white/70" />
         </div>

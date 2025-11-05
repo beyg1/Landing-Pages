@@ -1,4 +1,4 @@
-import { Hero, Services, Featured, Testimonials, CTA } from "@/components/sections";
+import { Hero, Services, Featured, Testimonials, CTA, } from "@/components/sections";
 
 export default function Home() {
   return (
