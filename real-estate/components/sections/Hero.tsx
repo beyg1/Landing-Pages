@@ -23,15 +23,16 @@ export default function Hero() {
             <div className="space-y-8">
               <div
                 className="inline-block rounded-full border border-white/20 bg-white/10 px-6 py-3 text-base font-medium backdrop-blur-sm opacity-0 animate-slide-in-up"
-                style={{ animationDelay: "0.1s" }}
+                style={{ animationDelay: "0.3s" }}
               >
-                <span className="text-accent font-semibold">EST. 2009</span> • Arcadia
+                <span className="text-accent font-semibold">EST. 2009</span> •
+                Arcadia
               </div>
-              
+
               <div className="space-y-6">
                 <h1
                   className="font-(--font-display) text-5xl md:text-7xl lg:text-8xl leading-none tracking-tighter opacity-0 animate-slide-in-up"
-                  style={{ animationDelay: "0.2s" }}
+                  style={{ animationDelay: "0.4s" }}
                 >
                   <span className="text-white">Bespoke</span>
                   <br />
@@ -41,30 +42,39 @@ export default function Hero() {
                   <span className="text-white">Refined</span>
                   <span className="text-accent"> Living</span>
                 </h1>
-                
+              </div>
+              <div>
                 <p
                   className="text-lg md:text-xl text-white/90 max-w-xl opacity-0 animate-slide-in-up"
-                  style={{ animationDelay: "0.3s" }}
+                  style={{ animationDelay: "0.6s" }}
                 >
-                  Exclusive properties curated for the most discerning clients, with unparalleled service and attention to detail.
+                  Exclusive properties curated for the most discerning clients,
+                  with unparalleled service and attention to detail.
                 </p>
               </div>
-              
+
               <div
                 className="flex flex-wrap gap-5 opacity-0 animate-slide-in-up"
-                style={{ animationDelay: "0.4s" }}
+                style={{ animationDelay: "0.7s" }}
               >
-                <LinkButton href="#featured" className="px-9 py-4 text-base font-medium shadow-2xl">
+                <LinkButton
+                  href="#featured"
+                  className="px-9 py-4 text-base font-medium shadow-2xl"
+                >
                   View Collection
                 </LinkButton>
-                <LinkButton href="#cta" variant="secondary" className="px-9 py-4 text-base font-medium">
+                <LinkButton
+                  href="#cta"
+                  variant="secondary"
+                  className="px-9 py-4 text-base font-medium"
+                >
                   Exclusive Access
                 </LinkButton>
               </div>
 
               <div
                 className="flex flex-wrap gap-8 pt-8 border-t border-white/10 opacity-0 animate-slide-in-up"
-                style={{ animationDelay: "0.5s" }}
+                style={{ animationDelay: "0.9s" }}
               >
                 <div>
                   <dt className="text-3xl font-bold text-accent">15+ Years</dt>
