@@ -1,146 +1,179 @@
-'use client'
+"use client";
 
-import { useRef, useEffect } from 'react'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { StickyCardData } from './data'
+import React, { useRef } from "react";
+import type { CSSProperties } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+import Image from "next/image";
+import { StickyCardData } from "./data";
 
-// Register GSAP plugins
-gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(ScrollTrigger, useGSAP);
 
-interface StickyCardsProps {
-  cards: StickyCardData[]
+export interface StickyCardsProps {
+  cards: StickyCardData[];
+  className?: string;
 }
 
-export function StickyCards({ cards }: StickyCardsProps) {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const cardsRef = useRef<HTMLDivElement[]>([])
+/**
+ * StickyCards
+ *
+ * - Data-driven stacked sticky cards powered by GSAP + ScrollTrigger.
+ * - Each card:
+ *   - Pins when reaching top.
+ *   - Previous cards scale down, rotate slightly, and darken via CSS variable.
+ * - Last card is not pinned (prevents layout freeze).
+ *
+ * Integration:
+ *   <StickyCards cards={stickyCardsData} />
+ */
+export const StickyCards: React.FC<StickyCardsProps> = ({ cards, className }) => {
+  const containerRef = useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => {
-    const container = containerRef.current
-    if (!container) return
+  useGSAP(
+    () => {
+      const container = containerRef.current;
+      if (!container || !cards.length) return;
 
-    // Set up ScrollTrigger for each card
-    const setupAnimations = () => {
-      const allCards = cardsRef.current
-      if (allCards.length === 0) return
+      const cardElements = gsap.utils.toArray<HTMLDivElement>("[data-sticky-card]");
 
-      allCards.forEach((card, index) => {
-        if (!card) return
+      // baseline: ensure all cards start as clear foreground
+      cardElements.forEach((card, index) => {
+        gsap.set(card, {
+          zIndex: cards.length - index,
+          scale: 1,
+          rotate: 0,
+          opacity: 1,
+          "--overlay-opacity": 0,
+        });
+      });
 
-        // Create ScrollTrigger for each card with onUpdate callback
+      // for each card except the last, create a trigger that:
+      // - pins the current card
+      // - as you scroll through its height, pushes it into the background
+      // - lets the next card come in clean as full foreground
+      cardElements.forEach((card, index) => {
+        const isLast = index === cardElements.length - 1;
+        const rotationDirection = index % 2 === 0 ? -6 : 6; // stronger for clearer effect
+
+        if (isLast) return;
+
+        const nextCard = cardElements[index + 1];
+
         ScrollTrigger.create({
           trigger: card,
-          start: 'top top',
-          end: 'bottom top',
-          pin: index < allCards.length - 1, // Don't pin the last card
+          start: "top top",
+          end: "bottom top",
+          pin: true,
           pinSpacing: false,
-          onUpdate: (self: ScrollTrigger) => {
-            const progress = self.progress
-            
-            // Get the next card
-            const nextCard = allCards[index + 1]
-            if (!nextCard) return
+          scrub: true,
+          onUpdate: (self) => {
+            const p = self.progress; // 0 -> 1 while scrolling this card range
 
-            // Calculate animation values based on scroll progress
-            const scale = 1 - (progress * 0.25) // Scale down to 0.75
-            const rotation = (index % 2 === 0 ? 1 : -1) * progress * 3 // ±3° rotation
-            const overlayOpacity = progress * 0.7 // Dark overlay fade
-
-            // Apply transformations to current card
+            // Current card: fade/scale/rotate into background
             gsap.set(card, {
-              scale: scale,
-              rotation: rotation,
-            })
+              scale: gsap.utils.mapRange(0, 1, 1, 0.78, p),
+              rotate: rotationDirection * p,
+              opacity: gsap.utils.mapRange(0, 1, 1, 0.0, p), // fully faded by end
+              "--overlay-opacity": p, // fully dark by end
+              zIndex: cards.length - index - 1, // always behind upcoming card
+            });
 
-            // Apply overlay opacity using CSS custom property
-            gsap.set(card, {
-              '--overlay-opacity': overlayOpacity.toString()
-            })
-          }
-        })
-      })
+            // Next card: ensure it feels like the clear foreground as it enters
+            // We don't fully control its scroll position here, but we can guarantee:
+            // - no dark overlay
+            // - full opacity
+            // - above the previous card
+            gsap.set(nextCard, {
+              opacity: 1,
+              scale: 1,
+              rotate: 0,
+              "--overlay-opacity": 0,
+              zIndex: cards.length - index,
+            });
+          },
+        });
+      });
 
-      // Refresh ScrollTrigger after setup
-      ScrollTrigger.refresh()
+      ScrollTrigger.sort();
+      ScrollTrigger.refresh();
+    },
+    {
+      scope: containerRef,
+      dependencies: [cards.length],
+      revertOnUpdate: true,
     }
-
-    // Initialize animations after a short delay
-    const timer = setTimeout(setupAnimations, 100)
-
-    // Cleanup function
-    return () => {
-      clearTimeout(timer)
-      ScrollTrigger.killAll()
-    }
-  }, [cards])
-
-  // Function to add card refs
-  const addCardRef = (el: HTMLDivElement | null, index: number) => {
-    if (el) {
-      cardsRef.current[index] = el
-    }
-  }
+  );
 
   return (
     <section
       ref={containerRef}
-      className="relative bg-gray-50"
-      role="region"
-      aria-label="Sticky Cards Section"
+      className={`relative bg-neutral-100 text-neutral-900 ${className ?? ""}`}
     >
-      {cards.map((card, index) => (
-        <div
-          key={card.index}
-          ref={(el) => addCardRef(el, index)}
-          className="sticky-card h-screen flex items-center justify-center relative overflow-hidden will-change-transform bg-gray-50"
-          style={{
-            zIndex: cards.length - index
-          }}
-        >
-          {/* Dark overlay for fade effect */}
-          <div
-            className="absolute inset-0 bg-black pointer-events-none"
-            style={{
-              opacity: 'var(--overlay-opacity, 0)'
-            }}
-          />
-          
-          <div className="max-w-6xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
-            {/* Left column: Index number */}
-            <div className="order-2 lg:order-1">
-              <div className="text-8xl lg:text-9xl font-bold text-gray-300 leading-none">
-                {card.index}
-              </div>
+      <div className="mx-auto flex min-h-screen max-w-6xl flex-col gap-16 px-4 py-24 sm:px-6 lg:px-8">
+        {cards.map((card) => (
+          <article
+            key={card.index}
+            data-sticky-card
+            style={
+              {
+                "--overlay-opacity": 0,
+              } as CSSProperties
+            }
+            className="relative flex min-h-screen items-center gap-10 border-b border-neutral-200 pb-24 will-change-transform last:border-b-0 bg-white"
+          >
+            {/* Overlay for darkening/stacking */}
+            <div
+              className="pointer-events-none absolute inset-4 rounded-3xl bg-black"
+              style={{
+                mixBlendMode: "multiply",
+                opacity: "var(--overlay-opacity, 0)",
+                transition: "opacity 0.2s linear",
+              }}
+            />
+
+            {/* Index column */}
+            <div className="relative flex-1 select-none text-5xl font-semibold tracking-tight text-neutral-300 sm:text-6xl md:text-7xl lg:text-8xl">
+              {String(card.index).padStart(2, "0")}
             </div>
-            
-            {/* Right column: Content */}
-            <div className="order-1 lg:order-2 space-y-6">
-              <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
+
+            {/* Content column */}
+            <div className="relative flex-[2] space-y-6">
+              <h2 className="text-balance text-2xl font-semibold tracking-tight sm:text-3xl md:text-4xl">
                 {card.title}
-              </h1>
-              
-              <div className="aspect-[5/3] overflow-hidden rounded-2xl">
-                <img
-                  src={card.image}
-                  alt={card.title}
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                />
-              </div>
-              
-              <div className="space-y-4">
-                <div className="text-sm font-semibold text-gray-500 uppercase tracking-wider">
-                  Overview
+              </h2>
+
+              <div className="overflow-hidden rounded-2xl border border-neutral-200 bg-white">
+                <div className="relative aspect-[5/3] w-full bg-neutral-100">
+                  <Image
+                    src={card.image}
+                    alt={card.title}
+                    fill
+                    priority={card.index === 1}
+                    className="h-full w-full object-cover"
+                    onError={(event) => {
+                      const target = event.target as HTMLImageElement;
+                      target.style.opacity = "0";
+                    }}
+                  />
+                  <div className="pointer-events-none absolute inset-0 flex items-center justify-center text-xs font-medium uppercase tracking-[0.2em] text-neutral-400">
+                    Placeholder Imagery
+                  </div>
                 </div>
-                <p className="text-lg text-gray-700 leading-relaxed">
+              </div>
+
+              <div className="grid gap-4 md:grid-cols-[120px,1fr]">
+                <div className="text-xs font-medium uppercase tracking-[0.2em] text-neutral-500">
+                  {card.label ?? "Overview"}
+                </div>
+                <p className="text-sm leading-relaxed text-neutral-800 md:text-base">
                   {card.description}
                 </p>
               </div>
             </div>
-          </div>
-        </div>
-      ))}
+          </article>
+        ))}
+      </div>
     </section>
-  )
-}
+  );
+};
