@@ -138,13 +138,13 @@ export const StickyCards: React.FC<StickyCardsProps> = ({ cards, className }) =>
             </div>
 
             {/* Content column */}
-            <div className="relative flex-[2] space-y-6">
+            <div className="relative flex-2 space-y-6">
               <h2 className="text-balance text-2xl font-semibold tracking-tight sm:text-3xl md:text-4xl">
                 {card.title}
               </h2>
 
               <div className="overflow-hidden rounded-2xl border border-neutral-200 bg-white">
-                <div className="relative aspect-[5/3] w-full bg-neutral-100">
+                <div className="relative aspect-5/3 w-full bg-neutral-100">
                   <Image
                     src={card.image}
                     alt={card.title}

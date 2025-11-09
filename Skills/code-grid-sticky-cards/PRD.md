@@ -8,206 +8,251 @@ Smooth scrolling should be handled via Lenis for a refined, fluid experience.
 
 This component should be framework-agnostic within Next.js, fully reusable, and styled with Tailwind CSS (no plain CSS files).
 
-🧩 Tech Stack
+We’re building a reusable, data-driven Sticky Cards scroll effect component in a Next.js + TypeScript + Tailwind CSS environment, using GSAP + ScrollTrigger for animations, and Lenis for smooth scrolling.
 
-Framework: Next.js 16 (App Router)
+Two key issues to address explicitly:
 
-Language: TypeScript
+Contrast & background visibility — Cards must visually stand out against the page background so animations (pinning, scaling, rotation, fade) are clearly perceivable.
 
-Styling: Tailwind CSS
+Animation flow & correct exit/presence behaviour — When one card transitions out and the next transitions in:
 
-Animations: GSAP + ScrollTrigger
+The previous card must fade out / disappear (or fade to the background) so it does not linger.
 
-Smooth Scroll: Lenis (React wrapper)
+The next card must reach full opacity and become the primary visual focus.
 
-Rendering: Client-side (must include "use client" directive)
+The stacking/pinning logic must avoid overlap artifacts where both cards remain partially visible in undesirable states.
 
-🏗️ Component Architecture
-1. Folder Structure
+Tech Stack
+
+Next.js 16 (App Router)
+
+TypeScript
+
+Tailwind CSS
+
+GSAP + ScrollTrigger
+
+Lenis (React wrapper)
+
+Component runs on client ("use client" directive if in app directory)
+
+Component Architecture & Folder Structure
 src/
   components/
     sticky-cards/
       StickyCards.tsx
       data.ts
 
-2. Data-Driven Design
-
-The component should map directly from a data array to automatically render multiple cards without manual setup.
-
-Each card object should include:
-
+Data Interface
 export interface StickyCardData {
-  index: number
-  title: string
-  image: string
-  description: string
+  index: number;
+  title: string;
+  image: string;
+  description: string;
 }
+export const stickyCardsData: StickyCardData[] = [ /* … */ ];
 
-
-Example dataset (data.ts):
-
-export const stickyCardsData: StickyCardData[] = [
-  {
-    index: 1,
-    title: "Intelligent Automation",
-    image: "/sticky-cards/automation.jpg",
-    description: "AI-driven systems that learn, adapt, and optimize workflows in real time."
-  },
-  {
-    index: 2,
-    title: "Human + Machine Collaboration",
-    image: "/sticky-cards/collaboration.jpg",
-    description: "Seamless synergy between people and autonomous agents for faster innovation."
-  },
-  // ... more cards
-]
-
-🎨 UI / Layout Requirements
+UI / Layout Requirements
 Section Structure
 
-Three full-screen sections:
+Intro Section — full screen, centered H1 (pre-cards)
 
-Intro Section (simple centered H1)
+Sticky Cards Section — this component sits here
 
-Sticky Cards Section (animated cards)
+Outro Section — full screen, centered H1 (post-cards)
 
-Outro Section (simple centered H1)
+Card Layout — Desktop
 
-Card Layout (Desktop)
+Each “card” occupies 100vh (full viewport height) inside the StickyCards section.
 
-Each card takes up 100vh (full viewport height).
+Two columns:
 
-Left column: large index number (index)
+Left side: large index number
 
-Right column: contains
+Right side: content column: title, image (5:3 aspect ratio), description block (label + text)
 
-Title (h1)
+Background / card container background must differ sufficiently from page background to ensure card visuals are readable and animations visible (see contrast section).
 
-Image (aspect ratio ~5:3, object-cover)
+Card Layout — Mobile
 
-Description block split into:
+On screens below ~1000px width: stack left & right sections vertically.
 
-Label (e.g., “Overview”)
-
-Description text (from data)
-
-Mobile Layout
-
-Stack columns vertically
-
-Reduce padding, gaps, and text sizes
-
-Maintain readability and consistent rhythm
+Ensure text and image scale accordingly (Tailwind responsive classes) and maintain readability.
 
 Visual Styling (Tailwind)
+Page & Cards Background / Contrast
 
-Dark background: bg-black
+Page background: bg-zinc-900 (or bg-black) or other dark theme.
 
-Foreground text: text-white
+Each card container: distinct background from page background, e.g., bg-zinc-800 (slightly lighter) or bg-gray-800, to ensure card boundary is visible.
 
-Strong contrast headings
+Within the card container:
 
-Smooth spacing: space-y-*, gap-*, p-*
+Overlay pseudo-element (or Tailwind custom css variable) .card‐overlay with background: rgba(0,0,0,var(--overlay-opacity)). This overlay will increase opacity to fade the card out as it transitions.
 
-Rounded image corners: rounded-2xl
+Use utility classes: text-white, rounded-2xl, overflow-hidden, object-cover for images.
 
-Overlay effect for fade-out handled via a Tailwind inline style using CSS variable (controlled by GSAP)
+Use will-change: transform, opacity (via Tailwind will-change-transform or custom) for smoother animations.
 
-⚙️ Animation Requirements
-ScrollTrigger Logic
+Example Tailwind snippet:
+<div class="sticky-card relative bg-zinc-800 text-white flex h-screen">
+  <div class="absolute inset-0 pointer-events-none"
+       style="--overlay-opacity:0; background:rgba(0,0,0,var(--overlay-opacity)); transition:opacity .3s;">
+  </div>
+  <div class="flex-none w-1/4 p-8 text-6xl font-bold">01</div>
+  <div class="flex-1 p-8 space-y-8">
+    <h2 class="text-4xl font-bold">Title</h2>
+    <img class="w-full aspect-5/3 object-cover rounded-2xl" src="/…"/>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="uppercase font-bold">Overview</div>
+      <div>Description text…</div>
+    </div>
+  </div>
+</div>
 
-Pin each card as it reaches the top of the viewport.
+Animation Requirements
+Pinning & Sequence Logic
 
-Do not pin the last card (to avoid layout freeze).
+For each card (except the last one):
 
-As the next card scrolls into view:
+Use ScrollTrigger.create({ trigger: cardElement, start: "top top", end: "bottom top", pin: true, pinSpacing: false }).
 
-The previous card:
+This ensures the card pins when it reaches the top of the viewport and remains fixed until the pinned region ends, then unpins.
 
-Scales down (to ~0.75)
+The last card should not be pinned (so scrolling continues naturally).
 
-Rotates slightly (odd/even alternating ±3°)
+Within each pinned card’s lifetime, we trigger overlap/fade/exit behaviour when the next card begins to scroll into view (so we sync previous card’s exit with next card’s entry).
 
-Dark overlay opacity increases (using CSS variable)
+Fade-out + Transition Behaviour
 
-Use pinSpacing: false for tight stacking.
+For the exit of a card (as next enters): use a ScrollTrigger attached to the next card as the trigger element; within it animate the previous card’s properties.
 
-GSAP Setup
+Example logic:
 
-Register ScrollTrigger
+const cards = gsap.utils.toArray(".sticky-card");
+cards.forEach((card, i) => {
+  if (i < cards.length-1) {
+    const nextCard = cards[i+1];
+    ScrollTrigger.create({
+      trigger: nextCard,
+      start: "top bottom", // when next enters from bottom
+      end: "top top",
+      scrub: true,
+      onUpdate: self => {
+        const progress = self.progress;
+        gsap.set(card, {
+          scale: 1 - 0.25*progress,               // scales down to ~0.75
+          rotate: (i % 2 === 0 ? 3 : -3) * progress, // alternate tilt
+        });
+        gsap.set(card, {
+          css: { "--overlay-opacity": progress }  // overlay fades in
+        });
+      }
+    });
+  }
+});
 
-Use useRef for container scope
 
-Use useGSAP() hook for scoped animations
+The overlay CSS variable --overlay-opacity should animate from 0 → 1 as the card transitions out. At progress = 1, the overlay should be fully opaque (card effectively dark/hidden).
 
-Use gsap.set() within onUpdate callback to modify:
+Meanwhile, the next card should be positioned at full opacity / scale until it becomes active, then gradually take over. Make sure initial state of next card is scale:1, rotate:0, --overlay-opacity:0.
 
-scale
+Ensuring Previous Card Fully Exits & Next Card Fully Enters
 
-rotate
+Explicitly set previous card’s opacity (or overlay opacity to 1) at the end of the exit timeline to avoid lingering visuals.
 
---overlay-opacity (CSS variable)
+Ensure next card has its own timeline or initial CSS such that at the start of its pinned period: opacity:1, scale:1, rotate:0, overlay = 0.
 
-🧠 Smooth Scrolling Integration
+From GSAP forum threads: mixing pinning and fade timelines can be tricky; often it’s easier to separate concerns (one ScrollTrigger for pinning, another for fade/out) to avoid unintended “both cards visible” states. 
+GSAP
++2
+GSAP
++2
 
-On the home page (or layout), wrap content in <ReactLenis root> for global smooth scrolling.
+Use z-index stacking if needed: each card container should have z-index: X so that next card comes above previous when its pin begins.
 
-Must not interfere with ScrollTrigger pinning.
+Example Pin + Fade Setup
+cards.forEach((card, i) => {
+  const next = cards[i+1];
+  if (!next) return;
+  ScrollTrigger.create({
+    trigger: next,
+    start: "top bottom",
+    end: "top top",
+    scrub: true,
+    pin: false,
+    onUpdate: (self) => {
+      const p = self.progress;
+      gsap.set(card, {
+        scale: 1 - 0.25*p,
+        rotate: (i % 2 === 0 ? 3 : -3) * p,
+      });
+      gsap.set(card, {
+        css: { "--overlay-opacity": p }
+      });
+    }
+  });
+});
 
-Example:
 
-import { ReactLenis } from 'lenis/react'
+And for pin:
 
-export default function HomePage() {
-  return (
-    <ReactLenis root>
-      <main>
-        <IntroSection />
-        <StickyCards />
-        <OutroSection />
-      </main>
-    </ReactLenis>
-  )
-}
+cards.forEach((card, i) => {
+  if (i < cards.length-1) {
+    ScrollTrigger.create({
+      trigger: card,
+      start: "top top",
+      endTrigger: cards[i+1],
+      end: "top top",
+      pin: true,
+      pinSpacing: false
+    });
+  }
+});
 
-🧩 Functional Requirements
-Feature	Description
-Dynamic Mapping	Automatically renders cards based on stickyCardsData
-Pinning	Each card pins in place as you scroll
-Scaling + Rotation	Active card scales down & rotates as next card enters
-Dark Overlay Fade	Smooth fade-out effect using a black overlay layer
-Responsive Layout	Fully adapts to mobile and tablet
-Reusable Component	Plug-and-play ready for any project section
-🧪 Developer Notes
+Functional Requirements Summary
+Feature	Requirement
+Contrast & Visual Distinction	Cards have background that differs from page background; overlay mechanism ensures previous card fully fades.
+Pinning & Flow	Each card (except last) pins when reaching viewport top, stays pinned until next card takeover, then unpins and fades.
+Exit Animation	Previous card scales down, rotates (alternating), overlay fades in → full opacity in overlay = card visually hidden.
+Entry Animation	Next card appears at full scale/opacity, no overlay, ready to become pinned.
+Responsive	Layout adjusts for mobile; animations remain smooth.
+Tailwind Styling	All styling via Tailwind (no external CSS files).
+Reusable Component	Accepts data array, auto-renders N cards without per-card config.
+Developer Notes & Tips
 
-The animation logic should be isolated within the StickyCards component.
+Use will-change: transform, opacity on card containers for smoother GPU animations.
 
-Avoid direct DOM queries; use React refs and GSAP selectors scoped via context.
+For the overlay fade, managing via CSS variable ensures underlying content remains hidden (rather than simply setting opacity:0 which can cause underlying cards to show through).
 
-Avoid hard-coded color values — use Tailwind’s color variables or CSS custom properties.
+Carefully manage z-index stacking: e.g., each card container z-10, z-20, etc so next card visually covers previous once pinned/unpinned sequence transitions.
 
-The component must be SSR-safe ("use client" at top).
+Ensure ScrollTrigger’s start and end positions are well configured so that the fade animation covers exactly the period when next card enters — see docs regarding "top bottom", "top top" etc for accurate timing. 
+GSAP
++1
+
+Isolate the animation logic in useEffect or useGSAP() hook inside the StickyCards component, scoped via container useRef, to avoid multiple triggers across re-renders.
 
 ✅ Acceptance Criteria
 
- Component displays intro, sticky card section, and outro.
+ Page background and card backgrounds are visually distinct; cards clearly visible when static.
 
- Cards are pinned sequentially during scroll.
+ On scroll through the cards section:
 
- Previous card scales down, rotates, and darkens as next enters.
+First card pins, then as next card enters: the first card scales down, rotates, overlay fades to full → it’s visually “gone”.
 
- Animations are smooth and GPU-accelerated (use will-change: transform).
+The second card reaches full scale/opacity, pins, becomes main card.
 
- Works seamlessly with Lenis smooth scrolling.
+No ghosting or half-visible previous cards remain when they should have exited.
 
- Layout adapts perfectly across all screen sizes.
+ The last card is not pinned, and on finishing the card sequence, normal scroll resumes.
 
- All styles use Tailwind (no external CSS files).
+ Works smoothly with Lenis smooth scrolling.
 
- TypeScript passes without errors.
+ Layout is fully responsive.
 
-🧱 Example File Imports
-import { stickyCardsData } from './data'
-import { StickyCards } from './StickyCards'
+ TypeScript passes, no errors.
 
-<StickyCards cards={stickyCardsData} />
+ All styling done via Tailwind CSS utilities or minimal custom CSS variables where needed.
+
+If you like, I can also attach a visual timing diagram or sequence sketch (showing pin → fade → next card entry) plus a small code snippet for the GSAP setup (with Tailwind class names) that you can hand to your coding agent. Would you like me to generate that?
