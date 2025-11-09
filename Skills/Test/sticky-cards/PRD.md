@@ -84,7 +84,7 @@ Page & Cards Background / Contrast
 
 Page background: bg-zinc-900 (or bg-black) or other dark theme.
 
-Each card container: distinct background from page background, e.g., bg-zinc-800 (slightly lighter) or bg-gray-800, to ensure card boundary is visible.
+Each card container: distinct background from page background, e.g., a shade of white , to ensure card boundary is visible.
 
 Within the card container:
 
@@ -255,4 +255,3 @@ No ghosting or half-visible previous cards remain when they should have exited.
 
  All styling done via Tailwind CSS utilities or minimal custom CSS variables where needed.
 
-If you like, I can also attach a visual timing diagram or sequence sketch (showing pin → fade → next card entry) plus a small code snippet for the GSAP setup (with Tailwind class names) that you can hand to your coding agent. Would you like me to generate that?
