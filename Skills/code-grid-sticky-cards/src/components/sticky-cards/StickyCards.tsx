@@ -110,7 +110,8 @@ export const StickyCards: React.FC<StickyCardsProps> = ({ cards, className }) =>
       ref={containerRef}
       className={`relative bg-zinc-950 text-white ${className ?? ""}`}
     >
-      <div className="mx-auto flex min-h-screen max-w-6xl flex-col gap-20 px-4 py-24 sm:px-6 lg:px-10">
+      {/* full-viewport stack, no width constraint so cards can occupy entire screen */}
+      <div className="flex flex-col">
         {cards.map((card) => (
           <article
             key={card.index}
@@ -120,14 +121,14 @@ export const StickyCards: React.FC<StickyCardsProps> = ({ cards, className }) =>
                 "--overlay-opacity": 0,
               } as CSSProperties
             }
-            className="sticky-card relative flex min-h-screen items-center gap-10 border-b border-zinc-900/80 pb-24 will-change-transform last:border-b-0"
+            className="sticky-card relative flex h-screen w-screen items-stretch gap-0 border-b border-zinc-900/80 will-change-transform last:border-b-0 overflow-hidden"
           >
-            {/* Card surface (light) */}
-            <div className="pointer-events-none absolute inset-0 rounded-4xl bg-zinc-50/98 shadow-[0_24px_120px_rgba(0,0,0,0.85)]" />
+            {/* Full-viewport light card surface */}
+            <div className="pointer-events-none absolute inset-0 bg-zinc-50 shadow-[0_24px_120px_rgba(0,0,0,0.9)]" />
 
             {/* Overlay for darkening/stacking (driven by GSAP) */}
             <div
-              className="card-overlay pointer-events-none absolute inset-0 rounded-4xl bg-black"
+              className="card-overlay pointer-events-none absolute inset-0 bg-black"
               style={{
                 mixBlendMode: "multiply",
                 opacity: "var(--overlay-opacity, 0)",
@@ -135,18 +136,28 @@ export const StickyCards: React.FC<StickyCardsProps> = ({ cards, className }) =>
               }}
             />
 
-            {/* Index column */}
-            <div className="relative z-10 flex-1 select-none pl-6 text-5xl font-semibold tracking-tight text-zinc-800 sm:text-6xl md:text-7xl lg:text-8xl">
-              {String(card.index).padStart(2, "0")}
+            {/* Left column: index, label, and hero text */}
+            <div className="relative z-10 flex w-7/12 flex-col justify-center gap-8 px-14 py-14">
+              <div className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.3em] text-emerald-400">
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                {card.label ?? "Overview"}
+              </div>
+              <div className="space-y-5">
+                <div className="text-8xl font-semibold leading-none tracking-tight text-zinc-800 sm:text-9xl">
+                  {String(card.index).padStart(2, "0")}
+                </div>
+                <h2 className="text-balance text-6xl font-semibold tracking-tight text-zinc-950 sm:text-7xl md:text-8xl">
+                  {card.title}
+                </h2>
+              </div>
+              <p className="mt-10 max-w-3xl text-[2.75rem] leading-relaxed text-zinc-700">
+                {card.description}
+              </p>
             </div>
 
-            {/* Content column */}
-            <div className="relative z-10 flex-2 pr-6 space-y-7">
-              <h2 className="text-balance text-3xl font-semibold tracking-tight text-zinc-950 sm:text-4xl md:text-5xl">
-                {card.title}
-              </h2>
-
-              <div className="overflow-hidden rounded-3xl border border-zinc-200 bg-zinc-50 shadow-[0_18px_70px_rgba(15,23,42,0.22)]">
+            {/* Right column: supporting image */}
+            <div className="relative z-10 flex w-5/12 items-center px-10 py-10">
+              <div className="overflow-hidden rounded-3xl border border-zinc-200 bg-zinc-50 shadow-[0_18px_70px_rgba(15,23,42,0.22)] w-full">
                 <div className="relative aspect-5/3 w-full">
                   <Image
                     src={card.image}
@@ -156,15 +167,6 @@ export const StickyCards: React.FC<StickyCardsProps> = ({ cards, className }) =>
                     className="h-full w-full object-cover"
                   />
                 </div>
-              </div>
-
-              <div className="grid gap-4 md:grid-cols-[140px,1fr]">
-                <div className="text-[10px] font-semibold uppercase tracking-[0.22em] text-emerald-500">
-                  {card.label ?? "Overview"}
-                </div>
-                <p className="text-sm leading-relaxed text-zinc-800 md:text-base">
-                  {card.description}
-                </p>
               </div>
             </div>
           </article>
