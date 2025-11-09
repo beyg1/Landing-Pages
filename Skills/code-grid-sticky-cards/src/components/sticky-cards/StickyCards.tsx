@@ -108,9 +108,9 @@ export const StickyCards: React.FC<StickyCardsProps> = ({ cards, className }) =>
   return (
     <section
       ref={containerRef}
-      className={`relative bg-neutral-100 text-neutral-900 ${className ?? ""}`}
+      className={`relative bg-zinc-950 text-white ${className ?? ""}`}
     >
-      <div className="mx-auto flex min-h-screen max-w-6xl flex-col gap-16 px-4 py-24 sm:px-6 lg:px-8">
+      <div className="mx-auto flex min-h-screen max-w-6xl flex-col gap-20 px-4 py-24 sm:px-6 lg:px-10">
         {cards.map((card) => (
           <article
             key={card.index}
@@ -120,53 +120,49 @@ export const StickyCards: React.FC<StickyCardsProps> = ({ cards, className }) =>
                 "--overlay-opacity": 0,
               } as CSSProperties
             }
-            className="relative flex min-h-screen items-center gap-10 border-b border-neutral-200 pb-24 will-change-transform last:border-b-0 bg-white"
+            className="sticky-card relative flex min-h-screen items-center gap-10 border-b border-zinc-900/80 pb-24 will-change-transform last:border-b-0"
           >
-            {/* Overlay for darkening/stacking */}
+            {/* Card surface (light) */}
+            <div className="pointer-events-none absolute inset-0 rounded-4xl bg-zinc-50/98 shadow-[0_24px_120px_rgba(0,0,0,0.85)]" />
+
+            {/* Overlay for darkening/stacking (driven by GSAP) */}
             <div
-              className="pointer-events-none absolute inset-4 rounded-3xl bg-black"
+              className="card-overlay pointer-events-none absolute inset-0 rounded-4xl bg-black"
               style={{
                 mixBlendMode: "multiply",
                 opacity: "var(--overlay-opacity, 0)",
-                transition: "opacity 0.2s linear",
+                transition: "opacity 0.3s linear",
               }}
             />
 
             {/* Index column */}
-            <div className="relative flex-1 select-none text-5xl font-semibold tracking-tight text-neutral-300 sm:text-6xl md:text-7xl lg:text-8xl">
+            <div className="relative z-10 flex-1 select-none pl-6 text-5xl font-semibold tracking-tight text-zinc-800 sm:text-6xl md:text-7xl lg:text-8xl">
               {String(card.index).padStart(2, "0")}
             </div>
 
             {/* Content column */}
-            <div className="relative flex-2 space-y-6">
-              <h2 className="text-balance text-2xl font-semibold tracking-tight sm:text-3xl md:text-4xl">
+            <div className="relative z-10 flex-2 pr-6 space-y-7">
+              <h2 className="text-balance text-3xl font-semibold tracking-tight text-zinc-950 sm:text-4xl md:text-5xl">
                 {card.title}
               </h2>
 
-              <div className="overflow-hidden rounded-2xl border border-neutral-200 bg-white">
-                <div className="relative aspect-5/3 w-full bg-neutral-100">
+              <div className="overflow-hidden rounded-3xl border border-zinc-200 bg-zinc-50 shadow-[0_18px_70px_rgba(15,23,42,0.22)]">
+                <div className="relative aspect-5/3 w-full">
                   <Image
                     src={card.image}
                     alt={card.title}
                     fill
                     priority={card.index === 1}
                     className="h-full w-full object-cover"
-                    onError={(event) => {
-                      const target = event.target as HTMLImageElement;
-                      target.style.opacity = "0";
-                    }}
                   />
-                  <div className="pointer-events-none absolute inset-0 flex items-center justify-center text-xs font-medium uppercase tracking-[0.2em] text-neutral-400">
-                    Placeholder Imagery
-                  </div>
                 </div>
               </div>
 
-              <div className="grid gap-4 md:grid-cols-[120px,1fr]">
-                <div className="text-xs font-medium uppercase tracking-[0.2em] text-neutral-500">
+              <div className="grid gap-4 md:grid-cols-[140px,1fr]">
+                <div className="text-[10px] font-semibold uppercase tracking-[0.22em] text-emerald-500">
                   {card.label ?? "Overview"}
                 </div>
-                <p className="text-sm leading-relaxed text-neutral-800 md:text-base">
+                <p className="text-sm leading-relaxed text-zinc-800 md:text-base">
                   {card.description}
                 </p>
               </div>
