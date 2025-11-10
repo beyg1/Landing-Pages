@@ -6,7 +6,7 @@ This document defines the complete requirements for the `smooth-parallax-animati
 
 Goal: Enable any competent engineer or AI coding agent to recreate/clone this project using ONLY this PRD, without needing to inspect the existing implementation.
 
-The final result is a reusable, production-ready smooth scrolling + parallax landing experience built with Next.js 14, TypeScript, Tailwind CSS, Framer Motion, and Lenis. It should feel cinematic, fluid, and modern, suitable as a hero/portfolio/landing page section or full page.
+The final result is a reusable, production-ready smooth scrolling + parallax landing experience built with Next.js 16, TypeScript, Tailwind CSS, Framer Motion, and Lenis. It should feel cinematic, fluid, and modern, suitable as a hero/portfolio/landing page section or full page.
 
 The implementation MUST:
 
@@ -20,14 +20,15 @@ The implementation MUST:
 
 The implementation MUST use the following stack and constraints:
 
-- Framework: Next.js `14.x` (App Router).
+- Framework: Next.js `16.x` (App Router).
 - Language: TypeScript (strict, no `any` where avoidable).
-- UI Library: React `18.x`.
+- UI Library: React `19.x`.
 - Styling: Tailwind CSS `3.x`.
-- Animations: Framer Motion `11.x`.
+- Animations: Framer Motion `12.x`.
 - Smooth Scrolling: Lenis `1.x`.
+- Compiler: React Compiler enabled.
 - Tooling:
-  - ESLint with Next.js defaults (or equivalent from boilerplate).
+  - Biome for linting and formatting.
   - PostCSS + Tailwind pipeline as standard for Next.js.
 
 Constraints:
@@ -559,9 +560,10 @@ Components API expectations:
 A solution is considered successful if a coding agent, using only this PRD, can produce:
 
 1. Functional Parallax Landing:
-   - Next.js 14 App Router.
+   - Next.js 16 App Router with React Compiler enabled.
    - TypeScript with no type errors.
    - Tailwind correctly configured.
+   - Biome for linting and formatting.
    - Lenis integrated for smooth scrolling.
    - Framer Motion used for:
      - Scroll-linked parallax on layers.
