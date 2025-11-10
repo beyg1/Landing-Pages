@@ -49,8 +49,38 @@ export interface StickyCardData {
   title: string;
   image: string;
   description: string;
+  label?: string; // Optional label for categorization
 }
-export const stickyCardsData: StickyCardData[] = [ /* … */ ];
+export const stickyCardsData: StickyCardData[] = [
+  {
+    index: 1,
+    title: "Intelligent Automation",
+    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=80",
+    description: "AI-driven systems that learn, adapt, and optimize mission-critical workflows in real time across your entire organization.",
+    label: "Overview",
+  },
+  {
+    index: 2,
+    title: "Human + Machine Collaboration",
+    image: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=80",
+    description: "Orchestrate seamless collaboration between teams and autonomous agents to ship better ideas to production faster.",
+    label: "Collaboration",
+  },
+  {
+    index: 3,
+    title: "Predictive Intelligence",
+    image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&q=80",
+    description: "Continuously forecast risk, demand, and opportunity using streaming data and resilient ML pipelines.",
+    label: "Signal",
+  },
+  {
+    index: 4,
+    title: "Real-Time Visibility",
+    image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1600&q=80",
+    description: "Unify fragmented data into a single live surface so every decision is informed, auditable, and aligned.",
+    label: "Clarity",
+  },
+];
 
 UI / Layout Requirements
 Section Structure
@@ -67,24 +97,37 @@ Each “card” occupies 100vh (full viewport height) inside the StickyCards sec
 
 Two columns:
 
-Left side: large index number
+Left side: 7/12 width - large index number, title, description
 
-Right side: content column: title, image (5:3 aspect ratio), description block (label + text)
+Right side: 5/12 width - image container with 5:3 aspect ratio
 
 Background / card container background must differ sufficiently from page background to ensure card visuals are readable and animations visible (see contrast section).
 
 Card Layout — Mobile
 
-On screens below ~1000px width: stack left & right sections vertically.
+On screens below 1024px width (lg breakpoint): stack left & right sections vertically.
 
-Ensure text and image scale accordingly (Tailwind responsive classes) and maintain readability.
+- Left section (content): full width, centered content
+- Right section (image): full width below content
+- Image maintains 5:3 aspect ratio with responsive scaling
+- Text sizes scale down appropriately for mobile readability
+
+Responsive Breakpoints:
+- Desktop (≥1024px): 7/12 + 5/12 layout
+- Tablet/Mobile (≥768px <1024px): stacked layout with adjusted padding
+- Mobile (<768px): stacked layout with compact spacing
+
+Image Specifications:
+- Aspect ratio: exactly 5:3 (1.6667:1)
+- Container: rounded-3xl with border and shadow
+- Responsive scaling: maintains aspect ratio across all screen sizes
 
 Visual Styling (Tailwind)
 Page & Cards Background / Contrast
 
-Page background: bg-zinc-900 (or bg-black) or other dark theme.
+Page background: bg-zinc-950 (dark theme).
 
-Each card container: distinct background from page background, e.g., bg-zinc-800 (slightly lighter) or bg-gray-800, to ensure card boundary is visible.
+Each card container: light background (bg-zinc-50) with subtle shadow effects to create high contrast against the dark page background, ensuring card boundary is clearly visible and animations are perceivable.
 
 Within the card container:
 
@@ -95,17 +138,26 @@ Use utility classes: text-white, rounded-2xl, overflow-hidden, object-cover for 
 Use will-change: transform, opacity (via Tailwind will-change-transform or custom) for smoother animations.
 
 Example Tailwind snippet:
-<div class="sticky-card relative bg-zinc-800 text-white flex h-screen">
-  <div class="absolute inset-0 pointer-events-none"
-       style="--overlay-opacity:0; background:rgba(0,0,0,var(--overlay-opacity)); transition:opacity .3s;">
+<div class="sticky-card relative bg-zinc-50 text-zinc-950 flex h-screen will-change-transform">
+  <div class="absolute inset-0 bg-zinc-50 shadow-[0_24px_120px_rgba(0,0,0,0.9)]" />
+  <div class="card-overlay absolute inset-0 bg-black pointer-events-none"
+       style="opacity: var(--overlay-opacity, 0); mix-blend-mode: multiply;" />
+  <div class="relative z-10 flex w-7/12 flex-col justify-center gap-8 px-14 py-14">
+    <div class="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.3em] text-emerald-400">
+      <span class="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+      Overview
+    </div>
+    <div class="space-y-5">
+      <div class="text-8xl font-semibold leading-none tracking-tight text-zinc-800">01</div>
+      <h2 class="text-balance text-6xl font-semibold tracking-tight text-zinc-950">Title</h2>
+    </div>
+    <p class="mt-10 max-w-3xl text-3xl leading-relaxed text-zinc-700">Description text…</p>
   </div>
-  <div class="flex-none w-1/4 p-8 text-6xl font-bold">01</div>
-  <div class="flex-1 p-8 space-y-8">
-    <h2 class="text-4xl font-bold">Title</h2>
-    <img class="w-full aspect-5/3 object-cover rounded-2xl" src="/…"/>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <div class="uppercase font-bold">Overview</div>
-      <div>Description text…</div>
+  <div class="relative z-10 flex w-5/12 items-center px-10 py-10">
+    <div class="overflow-hidden rounded-3xl border border-zinc-200 bg-zinc-50 shadow-[0_18px_70px_rgba(15,23,42,0.22)] w-full">
+      <div class="relative aspect-5/3 w-full">
+        <img class="h-full w-full object-cover" src="/…" alt="Title" />
+      </div>
     </div>
   </div>
 </div>
@@ -141,8 +193,8 @@ cards.forEach((card, i) => {
       onUpdate: self => {
         const progress = self.progress;
         gsap.set(card, {
-          scale: 1 - 0.25*progress,               // scales down to ~0.75
-          rotate: (i % 2 === 0 ? 3 : -3) * progress, // alternate tilt
+          scale: gsap.utils.mapRange(0, 1, 1, 0.78, progress), // scales down to 0.78
+          rotate: (i % 2 === 0 ? -6 : 6) * progress, // stronger alternate tilt (±6°)
         });
         gsap.set(card, {
           css: { "--overlay-opacity": progress }  // overlay fades in
@@ -184,8 +236,8 @@ cards.forEach((card, i) => {
     onUpdate: (self) => {
       const p = self.progress;
       gsap.set(card, {
-        scale: 1 - 0.25*p,
-        rotate: (i % 2 === 0 ? 3 : -3) * p,
+        scale: gsap.utils.mapRange(0, 1, 1, 0.78, p),
+        rotate: (i % 2 === 0 ? -6 : 6) * p,
       });
       gsap.set(card, {
         css: { "--overlay-opacity": p }
@@ -254,5 +306,3 @@ No ghosting or half-visible previous cards remain when they should have exited.
  TypeScript passes, no errors.
 
  All styling done via Tailwind CSS utilities or minimal custom CSS variables where needed.
-
-If you like, I can also attach a visual timing diagram or sequence sketch (showing pin → fade → next card entry) plus a small code snippet for the GSAP setup (with Tailwind class names) that you can hand to your coding agent. Would you like me to generate that?
