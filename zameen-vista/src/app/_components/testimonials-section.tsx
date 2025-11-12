@@ -49,9 +49,9 @@ export function TestimonialsSection() {
     <section
       id="testimonials"
       ref={ref}
-      className="py-24 md:py-32 bg-curtain-light"
+      className="min-h-screen flex items-center justify-center bg-curtain-light"
     >
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-6 py-16">
         <div
           className={`text-center mb-16 transition-all duration-700 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
