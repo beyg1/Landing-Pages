@@ -21,7 +21,7 @@ export function HeroSection() {
           priority
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-curtain-dark/80 via-curtain-dark/60 to-curtain-dark/90" />
+        <div className="absolute inset-0 bg-linear-to-b from-curtain-dark/80 via-curtain-dark/60 to-curtain-dark/90" />
       </div>
 
       {/* Content */}
@@ -60,16 +60,7 @@ export function HeroSection() {
           </div>
         </div>
 
-        {/* Scroll indicator */}
-        <div
-          className={`absolute bottom-8 left-1/2 -translate-x-1/2 transition-all duration-1000 delay-500 ${
-            isVisible ? "opacity-100" : "opacity-0"
-          }`}
-        >
-          <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center pt-2">
-            <div className="w-1 h-3 bg-white/50 rounded-full animate-bounce" />
-          </div>
-        </div>
+        
       </div>
     </section>
   );
