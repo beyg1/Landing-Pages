@@ -109,6 +109,7 @@ export function ContactSection() {
                   type="text"
                   id="name"
                   name="name"
+                  autoComplete="name"
                   required
                   value={formData.name}
                   onChange={handleChange}
@@ -128,6 +129,7 @@ export function ContactSection() {
                   type="email"
                   id="email"
                   name="email"
+                  autoComplete="email"
                   required
                   value={formData.email}
                   onChange={handleChange}
@@ -147,6 +149,7 @@ export function ContactSection() {
                   type="tel"
                   id="phone"
                   name="phone"
+                  autoComplete="tel"
                   value={formData.phone}
                   onChange={handleChange}
                   className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent text-white"
@@ -164,6 +167,7 @@ export function ContactSection() {
                 <select
                   id="service"
                   name="service"
+                  autoComplete="off"
                   required
                   value={formData.service}
                   onChange={handleChange}
@@ -186,6 +190,7 @@ export function ContactSection() {
                 <textarea
                   id="message"
                   name="message"
+                  autoComplete="off"
                   required
                   value={formData.message}
                   onChange={handleChange}

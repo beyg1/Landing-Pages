@@ -2,9 +2,11 @@
 
 import Image from "next/image";
 import { useReveal } from "./use-reveal";
+import { useLenisInstance } from "./smooth-scroll-provider";
 
 export function HeroSection() {
   const { ref, isVisible } = useReveal();
+  const { scrollTo } = useLenisInstance();
 
   return (
     <section
@@ -45,6 +47,10 @@ export function HeroSection() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <a
               href="#featured"
+              onClick={(e) => {
+                e.preventDefault();
+                scrollTo("#featured", { offset: 0 });
+              }}
               className="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold bg-accent text-white rounded-lg hover:bg-accent/90 transition-all duration-300 hover:scale-105 shadow-lg"
               aria-label="Search properties"
             >
@@ -52,6 +58,10 @@ export function HeroSection() {
             </a>
             <a
               href="#contact"
+              onClick={(e) => {
+                e.preventDefault();
+                scrollTo("#contact", { offset: 0 });
+              }}
               className="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold bg-white text-curtain-dark rounded-lg hover:bg-gray-100 transition-all duration-300 hover:scale-105 shadow-lg"
               aria-label="List a property"
             >
