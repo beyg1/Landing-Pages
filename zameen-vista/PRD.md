@@ -33,15 +33,15 @@ Page Structure (sections)
 
 The page is a single Next.js App Router page (src/app/page.tsx) structured as 5 major sections arranged vertically, implemented as reusable React components with advanced animations and interactions:
 
-Hero — Ultra-modern hero with parallax background image, floating stats card, animated gradient orbs, asymmetric layout with complex typography scaling (clamp-based responsive text), trust indicators with animated pulses, dual CTAs with hover effects, and staggered entrance animations.
+Hero — Ultra-modern hero with parallax background image (Pakistani architecture from Unsplash), floating stats card showing 10K+ Active Listings, 500+ Expert Agents, and 100% Verified properties, animated gradient orbs, asymmetric layout with complex typography scaling (clamp-based responsive text), trust indicators with animated pulses, dual CTAs ("Search Properties" and "List a Property") with Lenis-powered smooth scrolling, hover gradient effects, and staggered entrance animations.
 
-Services — Sophisticated bento-style grid layout with 5 service cards (Buying, Selling, Renting, Valuation, Agent Services) featuring hover gradient backgrounds, feature lists with check icons, prominent CTAs, and a bottom custom solutions CTA banner. Each card has unique gradient themes and corner decorative elements.
+Services — Sophisticated bento-style grid layout with 5 service cards (Property Buying, Property Selling, Rental Services, Property Valuation, Agent Services) featuring hover gradient backgrounds with unique themes (blue-cyan, emerald-green, purple-pink, orange-red, indigo-violet), feature lists with CheckCircle2 icons ("Verified Listings", "Expert Marketing", etc.), prominent CTAs ("Browse Listings", "List Property", etc.), and a bottom custom solutions CTA banner. Each card has corner decorative elements with gradient orbs and backdrop-blur effects.
 
-Featured Listings — Premium property showcase with 6 featured listings in a responsive grid, decorative background orbs, featured/type badges, detailed property cards with hover effects, price formatting, property details (beds/baths/area) with icons, view buttons, and corner glow effects on hover.
+Featured Listings — Premium property showcase with 6 featured listings (Modern Villa in Islamabad, Luxury Apartment in Karachi, Commercial Plaza in Lahore, Farmhouse in Bahria Town, Sea View Apartment in Clifton, Corner Plot in DHA) in a responsive grid (md:2 cols, lg:3 cols), decorative background orbs with blur effects, featured/type badges ("Featured", "For Sale"/"For Rent"), detailed property cards with hover scale effects, price formatting (PKR format), property details (beds/baths/area) with Lucide icons (Bed, Bath, Maximize2), view buttons with ArrowRight icons, and corner glow effects on hover.
 
-Testimonials — Auto-scrolling horizontal carousel with 10 testimonials, star ratings (including half-stars), author profiles with avatars, animated cards with hover effects, gradient overlays, and bottom stats section with animated counters.
+Testimonials — Auto-scrolling horizontal carousel (15s duration, pauses on hover) with 10 testimonials featuring star ratings (4.5-5 stars with half-star support), author profiles with Unsplash avatars, animated cards with hover effects (scale, border changes), gradient overlays, bottom stats section with animated counters (10,000+ Happy Clients, 5,000+ Properties Sold, 8,500+ 5-Star Reviews, 50+ Cities Covered), and seamless loop with duplicate slides for continuous scrolling.
 
-Contact Us — Comprehensive contact section with form validation, contact information cards (phone/WhatsApp/email/office), business hours, success/error states, smooth animations, and multiple contact methods.
+Contact Us — Comprehensive contact section with form validation (required fields, email regex), contact information cards (phone tap-to-call +92 300 1234567, WhatsApp wa.me/923001234567, email info@zameenvista.com, office Blue Area Islamabad), business hours (Mon-Fri 9AM-6PM, Sat 10AM-4PM, Sun Closed), success/error states with user feedback, smooth animations, and multiple contact methods.
 
 Note on section backgrounds: Sections should alternate between two contrasting background colors (e.g., deep indigo and off-white / cream) to create a curtain-like effect on scroll with Lenis smoothing.
 
@@ -53,11 +53,11 @@ Section background contrast: alternating curtain-dark (#0f172a) and curtain-ligh
 
 Responsive design (desktop/tablet/mobile) with fluid typography using clamp() functions for scalable text (e.g., text-[clamp(3rem,8vw,7rem)]), cards adapt to grid layouts, and mobile-first approach with progressive enhancement.
 
-Images are high-quality Unsplash placeholders with optimized query params (?auto=format&fit=crop&w=...&q=...); Next.js Image component handles lazy loading, responsive sizing, and performance optimizations automatically.
+Images are high-quality Unsplash placeholders with optimized query params (?auto=format&fit=crop&w=800&q=80 for listings, w=2000&q=80 for hero); Next.js Image component handles lazy loading, responsive sizing (sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"), priority loading for hero, and performance optimizations automatically.
 
-Advanced animations: intersection observer-based reveal animations with staggered delays, parallax effects on hero background, floating gradient orbs, hover micro-interactions on cards (scale, border color, glow effects), auto-scrolling testimonials carousel (15s duration, pauses on hover), and smooth scroll-to navigation.
+Advanced animations: intersection observer-based reveal animations (useReveal hook with configurable thresholds 0.1-0.2) with staggered delays (200-500ms), parallax scaling effects on hero background (scale-100 to scale-[2]), floating gradient orbs with animate-pulse, hover micro-interactions on cards (hover:-translate-y-2, border-accent/30, glow effects), auto-scrolling testimonials carousel (animate-scroll-rtl 15s linear infinite, pauses on hover), and Lenis-powered smooth scroll-to navigation.
 
-Hero CTAs: "Search Properties" and "List a Property" with Lenis-powered smooth scrolling to sections, hover gradient effects, and SVG icons with transition animations.
+Hero CTAs: "Search Properties" (scrolls to #featured) and "List a Property" (scrolls to #contact) with Lenis-powered smooth scrolling, hover gradient effects (from-accent to-cyan-500), and custom SVG icons with transition animations.
 
 Contact form: POST to /api/contact endpoint with TypeScript validation, form state management, success/error displays, and structured data handling; includes WhatsApp, phone, and email contact methods with tap-to-call links.
 
@@ -79,13 +79,13 @@ Security: sanitize inputs server-side; use HTTPS for all endpoints.
 
 Visual & UX Requirements
 
-Typography: Ultra-responsive fluid typography using clamp() functions for scalable headings (e.g., clamp(3rem, 8vw, 7rem)), Playfair Display for display text (serif) and Inter for body text (sans-serif), loaded via Next.js font optimization.
+Typography: Ultra-responsive fluid typography using clamp() functions for scalable headings (e.g., text-[clamp(3rem,8vw,7rem)]), Playfair Display (--font-playfair) for display text (serif) and Inter (--font-inter) for body text (sans-serif), loaded via Next.js font optimization with variable names.
 
-Advanced Animations: IntersectionObserver-powered reveal animations with configurable thresholds and staggered delays, parallax background scaling on hero, floating animated orbs with blur effects, auto-scrolling testimonials carousel with hover pause, card hover effects (scale, border changes, glow effects), and smooth Lenis-powered navigation. All animations use transform/opacity only for 60fps performance.
+Advanced Animations: IntersectionObserver-powered reveal animations (useReveal hook) with configurable thresholds (0.1-0.2) and staggered delays, parallax background scaling on hero (scale-[2] to scale-100), floating animated orbs with blur-3xl effects, auto-scrolling testimonials carousel (scroll-rtl 15s linear infinite) with hover pause, card hover effects (hover:-translate-y-2, border-accent/30, bg-accent/20), corner glow effects, and smooth Lenis-powered navigation. All animations use transform/opacity only for 60fps performance.
 
-Color System: Two contrasting curtain backgrounds - curtain-dark (#0f172a, indigo-900) for dark sections and curtain-light (#fff9f1, warm cream) for light sections, with accent color (#06b6d4, cyan-500) for CTAs and highlights. Decorative gradients use cyan, blue, purple, and green variations.
+Color System: Two contrasting curtain backgrounds - curtain-dark (--color-curtain-dark: #0f172a, indigo-900) for dark sections and curtain-light (--color-curtain-light: #fff9f1, warm cream) for light sections, with accent color (--color-accent: #06b6d4, cyan-500) for CTAs and highlights. Decorative gradients use cyan, blue, purple, green, and orange-red variations.
 
-Imagery: Curated Unsplash photos optimized with Next.js Image component, responsive sizing with priority loading for hero, optimized query parameters for performance, and gradient overlays for text contrast and depth effects.
+Imagery: Curated Unsplash photos (hero: Pakistani architecture, listings: residential/commercial properties, testimonials: professional avatars) optimized with Next.js Image component, responsive sizing with priority loading for hero (priority={true}), optimized query parameters (?auto=format&fit=crop&w=800&q=80), sizes attributes for responsive loading, and multi-layer gradient overlays for text contrast and depth effects.
 
 Content Requirements
 

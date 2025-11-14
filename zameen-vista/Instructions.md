@@ -54,10 +54,10 @@ Context7 MCP step:
   - --color-curtain-light: #fff9f1
   - --color-accent: #06b6d4
 - Curate 10+ Unsplash images with optimized parameters:
-  - Hero: Pakistani architecture/modern buildings
-  - Listings: Residential/commercial properties
-  - Testimonials: Professional avatars
-  - Query params: ?auto=format&fit=crop&w=800&q=80 for listings, w=2000 for hero
+  - Hero: Pakistani architecture/modern buildings (https://images.unsplash.com/photo-1605146769289-440113cc3d00?auto=format&fit=crop&w=2000&q=80)
+  - Listings: Residential/commercial properties (?auto=format&fit=crop&w=800&q=80)
+  - Testimonials: Professional avatars (?auto=format&fit=crop&w=150&q=80)
+  - Query params: ?auto=format&fit=crop&w=800&q=80 for listings, w=2000 for hero, w=150 for avatars
 
 Context7 MCP step:
 - Verify Next.js font optimization via /vercel/next.js
@@ -129,12 +129,12 @@ Context7 MCP Action:
 
 🖼️ 6. Next.js Image optimization & reveal animations
 
-- Create src/app/_components/use-reveal.tsx hook using IntersectionObserver
-- Configure threshold: 0.1-0.2 for staggered reveal effects
-- Implement parallax scaling for hero background image
-- Use Next.js Image with priority for hero, responsive sizes for listings
-- Apply reveal animations: opacity-0 translate-y-8 to opacity-100 translate-y-0
-- Stagger animations with configurable delays (e.g., 200-500ms)
+- Create src/app/_components/use-reveal.tsx hook using IntersectionObserver with configurable threshold (default 0.1)
+- Configure threshold: 0.1 for hero (immediate reveal), 0.2 for sections (staggered reveal)
+- Implement parallax scaling for hero background image (scale-[2] to scale-100 on reveal)
+- Use Next.js Image with priority={true} for hero, responsive sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" for listings
+- Apply reveal animations: opacity-0 translate-y-8/translate-x-16 to opacity-100 translate-y-0/translate-x-0
+- Stagger animations with configurable delays (200-500ms) and transitionDelay for cards
 
 Context7 MCP Action:
 - Verify Next.js Image optimization patterns via /vercel/next.js
@@ -142,24 +142,24 @@ Context7 MCP Action:
 
 🧾 7. Contact form with API integration
 
-- Create src/app/api/contact/route.ts with POST handler
-- Implement form validation: required fields, email regex, TypeScript types
-- Add contact section with form fields: name, email, phone, service select, message
-- Include multiple contact methods: phone tap-to-call, WhatsApp, email, office address
-- Add business hours display and success/error state management
-- Use form state with loading states and user feedback
+- Create src/app/api/contact/route.ts with POST handler and TypeScript types
+- Implement form validation: required fields, email regex, phone pattern, TypeScript FormState interface
+- Add contact section with form fields: name (autocomplete="name"), email (autocomplete="email"), phone (autocomplete="tel"), service select (buy/sell/rent/valuation), message (textarea)
+- Include multiple contact methods: phone (+92 300 1234567 tap-to-call), WhatsApp (wa.me/923001234567), email (info@zameenvista.com), office address (Blue Area, Islamabad)
+- Add business hours display (Mon-Fri 9AM-6PM, Sat 10AM-4PM, Sun Closed) and success/error state management
+- Use form state with loading states ("Sending..."), user feedback, and form reset on success
 
 Context7 MCP Action:
 - Verify Next.js Route Handlers API via /vercel/next.js
 
 💬 8. Auto-scrolling testimonials carousel
 
-- Create testimonials section with 10 testimonials including ratings (4.5-5 stars)
-- Implement auto-scrolling horizontal carousel with CSS animations (15s linear infinite)
-- Add hover pause functionality and seamless loop with duplicate slides
-- Include star ratings with half-star support and accessibility labels
-- Add bottom stats section with animated counters
-- Ensure keyboard navigation and screen reader support
+- Create testimonials section with 10 testimonials (real names, cities, professional roles) including ratings (4.5-5 stars)
+- Implement auto-scrolling horizontal carousel with CSS animations (animate-scroll-rtl 15s linear infinite)
+- Add hover pause functionality (animation-play-state: paused) and seamless loop with duplicate slides
+- Include star ratings with half-star support using Star icons and aria-label for accessibility
+- Add bottom stats section with animated counters (10,000+ Happy Clients, 5,000+ Properties Sold, etc.)
+- Ensure keyboard navigation (focusable cards) and screen reader support (aria-label, role="img")
 
 Context7 MCP Action:
 - Verify WAI-ARIA carousel patterns for accessibility compliance
