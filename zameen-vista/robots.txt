@@ -13,4 +13,4 @@ Allow: /_next/static/
 Allow: /favicon.ico
 
 # Sitemap
-Sitemap: https://zameen-vista.vercel.app/sitemap.xml
+Sitemap: https://landing-pages-blue.vercel.app/sitemap.xml
