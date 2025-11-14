@@ -43,12 +43,12 @@ export function HeroSection() {
           <div className="grid lg:grid-cols-12 gap-12 items-center">
             {/* Text Content - Left Side */}
             <div className="lg:col-span-7 space-y-8">
-              {/* Eyebrow Text */}
+              {/* Eyebrow Text - Top to Bottom */}
               <div
-                className={`transition-all duration-500 delay-100 ${
+                className={`transition-all duration-1000 ease-out ${
                   isVisible
                     ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-4"
+                    : "opacity-0 -translate-y-8"
                 }`}
               >
                 <span className="inline-block px-4 py-2 bg-accent/10 backdrop-blur-sm border border-accent/20 rounded-full text-accent text-sm font-medium tracking-wide">
@@ -56,12 +56,12 @@ export function HeroSection() {
                 </span>
               </div>
 
-              {/* Main Heading - Extra Large */}
+              {/* Main Heading - Left to Right */}
               <h1
-                className={`transition-all duration-700 delay-200 ${
+                className={`transition-all duration-1000 ease-out delay-500 ${
                   isVisible
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-8"
+                    ? "opacity-100 translate-x-0"
+                    : "opacity-0 -translate-x-16"
                 }`}
               >
                 <span className="block font-display text-[clamp(3rem,8vw,7rem)] leading-[0.95] tracking-tight mb-4">
@@ -75,12 +75,12 @@ export function HeroSection() {
                 </span>
               </h1>
 
-              {/* Subheading - Large and Readable */}
+              {/* Subheading - Right to Left */}
               <p
-                className={`text-[clamp(1.25rem,2.5vw,1.75rem)] leading-relaxed text-gray-300 max-w-2xl transition-all duration-700 delay-300 ${
+                className={`text-[clamp(1.25rem,2.5vw,1.75rem)] leading-relaxed text-gray-300 max-w-2xl transition-all duration-1000 ease-out delay-1000 ${
                   isVisible
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-8"
+                    ? "opacity-100 translate-x-0"
+                    : "opacity-0 translate-x-16"
                 }`}
               >
                 Buy, sell, or rent properties with{" "}
@@ -89,12 +89,12 @@ export function HeroSection() {
                 <span className="text-white font-semibold">trusted service</span>.
               </p>
 
-              {/* Trust Indicators */}
+              {/* Trust Indicators - Bottom to Top */}
               <div
-                className={`flex flex-wrap gap-6 text-sm transition-all duration-700 delay-400 ${
+                className={`flex flex-wrap gap-6 text-sm transition-all duration-1000 ease-out delay-2000 ${
                   isVisible
                     ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-8"
+                    : "opacity-0 translate-y-12"
                 }`}
               >
                 <div className="flex items-center gap-2">
@@ -111,12 +111,12 @@ export function HeroSection() {
                 </div>
               </div>
 
-              {/* CTAs - Prominent Placement */}
+              {/* CTAs - Bottom to Top */}
               <div
-                className={`flex flex-col sm:flex-row gap-4 pt-4 transition-all duration-700 delay-500 ${
+                className={`flex flex-col sm:flex-row gap-4 pt-4 transition-all duration-1000 ease-out delay-1500 ${
                   isVisible
                     ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-8"
+                    : "opacity-0 translate-y-12"
                 }`}
               >
                 <a
@@ -176,10 +176,10 @@ export function HeroSection() {
               </div>
             </div>
 
-            {/* Visual Element - Right Side */}
+            {/* Visual Element - Right Side - Scale Animation */}
             <div className="lg:col-span-5 relative hidden lg:block">
               <div
-                className={`transition-all duration-1000 ease-out delay-600 ${
+                className={`transition-all duration-1000 ease-out delay-2200 ${
                   isVisible
                     ? "opacity-100 scale-100"
                     : "opacity-0 scale-75"
