@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+
+# Block access to API routes
+Disallow: /api/
+
+# Block access to Next.js internal routes
+Disallow: /_next/
+Disallow: /.next/
+
+# Allow crawling of static assets
+Allow: /_next/static/
+Allow: /favicon.ico
+
+# Sitemap
+Sitemap: https://zameen-vista.vercel.app/sitemap.xml
+Sitemap: http://localhost:3000/sitemap.xml

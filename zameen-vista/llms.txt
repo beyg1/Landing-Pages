@@ -1,0 +1,65 @@
+# Zameen Vista - Real Estate Portfolio Project
+
+## Project Overview
+Zameen Vista is a modern, responsive real estate website built for property giants in major Pakistani cities including Islamabad, Lahore, Karachi, Rawalpindi, and other metropolitan areas. This portfolio project showcases professional real estate platform development with a focus on user experience, accessibility, and performance.
+
+## Technologies Used
+- **Framework**: Next.js 16 with App Router
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **Icons**: Lucide React
+- **Fonts**: Google Fonts (Playfair Display, Inter)
+- **Package Manager**: pnpm
+- **Deployment**: Vercel
+
+## Key Features
+- **Responsive Design**: Mobile-first approach with fluid layouts
+- **Accessibility**: WCAG compliant with 100/100 Lighthouse accessibility score
+- **Performance**: Optimized with Next.js Image component and lazy loading
+- **SEO**: Meta tags, structured data, robots.txt, and XML sitemap
+- **Modern UI**: Glassmorphism effects, smooth animations, and professional design
+- **Real Estate Focus**: Property listings, agent services, valuation, and contact forms
+
+## Project Structure
+```
+src/
+├── app/
+│   ├── layout.tsx          # Root layout with metadata and fonts
+│   ├── page.tsx           # Homepage with all sections
+│   ├── globals.css        # Global styles and Tailwind imports
+│   ├── sitemap.ts         # XML sitemap generation
+│   └── _components/       # Reusable components
+│       ├── hero-section.tsx
+│       ├── services-section.tsx
+│       ├── featured-listings-section.tsx
+│       ├── testimonials-section.tsx
+│       ├── contact-section.tsx
+│       ├── footer.tsx
+│       └── use-reveal.tsx # Intersection Observer hook
+```
+
+## Developer Information
+**Name**: AbdurRab (Mirza)
+**Role**: React Developer
+**Portfolio**: https://mirza-dev.vercel.app
+**Skills**: React, Next.js, TypeScript, Tailwind CSS, Node.js, MongoDB
+**Experience**: Full-stack development with focus on modern web technologies
+
+## Contact
+- **Portfolio**: https://mirza-dev.vercel.app
+- **Email**: Available through portfolio contact form
+- **Location**: Pakistan
+
+## Business Context
+This project serves as a demonstration of real estate website development capabilities, designed to showcase to potential clients (real estate companies, property developers, and real estate giants) the ability to create professional, accessible, and high-performing real estate platforms.
+
+## Development Approach
+- Clean, maintainable code with TypeScript
+- Component-based architecture
+- Responsive design principles
+- Performance optimization
+- Accessibility best practices
+- SEO optimization
+
+## Deployment
+The project is optimized for deployment on Vercel with automatic scaling, edge functions, and global CDN distribution.
