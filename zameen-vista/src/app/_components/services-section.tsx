@@ -73,7 +73,7 @@ export function ServicesSection() {
     <section
       id="services"
       ref={ref}
-      className="relative min-h-screen flex items-center justify-center bg-linear-to-br from-curtain-light via-white to-gray-50 overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center bg-curtain-light overflow-hidden"
     >
       {/* Decorative Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
