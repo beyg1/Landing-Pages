@@ -172,21 +172,50 @@ export function TestimonialsSection() {
             isVisible ? "opacity-100" : "opacity-0"
           }`}
         >
-          {/* Gradient Overlays for Fade Effect */}
-          <div className="absolute left-0 top-0 bottom-0 w-32 bg-linear-to-r from-curtain-light to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-32 bg-linear-to-l from-curtain-light to-transparent z-10 pointer-events-none" />
+          {/* Desktop: Auto-scrolling carousel */}
+          <div className="hidden md:block">
+            {/* Gradient Overlays for Fade Effect */}
+            <div className="absolute left-0 top-0 bottom-0 w-32 bg-linear-to-r from-curtain-light to-transparent z-10 pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-32 bg-linear-to-l from-curtain-light to-transparent z-10 pointer-events-none" />
 
-          {/* Scrolling Container */}
-          <div className="overflow-hidden">
-            <div className="flex gap-6 animate-scroll-rtl">
-              {/* First set of testimonials */}
-              {testimonials.map((testimonial) => (
-                <TestimonialCard key={`first-${testimonial.id}`} testimonial={testimonial} />
-              ))}
-              {/* Duplicate set for seamless loop */}
-              {testimonials.map((testimonial) => (
-                <TestimonialCard key={`second-${testimonial.id}`} testimonial={testimonial} />
-              ))}
+            {/* Scrolling Container */}
+            <div className="overflow-hidden">
+              <div className="flex gap-6 animate-scroll-rtl">
+                {/* First set of testimonials */}
+                {testimonials.map((testimonial) => (
+                  <TestimonialCard key={`first-${testimonial.id}`} testimonial={testimonial} />
+                ))}
+                {/* Duplicate set for seamless loop */}
+                {testimonials.map((testimonial) => (
+                  <TestimonialCard key={`second-${testimonial.id}`} testimonial={testimonial} />
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Mobile: Horizontal scrollable container */}
+          <div className="md:hidden">
+            <div className="overflow-x-auto pb-4 scrollbar-hide">
+              <div className="flex gap-6 w-max px-6">
+                {testimonials.map((testimonial) => (
+                  <TestimonialCard key={`mobile-${testimonial.id}`} testimonial={testimonial} />
+                ))}
+              </div>
+            </div>
+
+            {/* Scroll Indicator */}
+            <div className="flex justify-center mt-6">
+              <div className="flex items-center gap-3 text-slate-500 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full border border-slate-200/50">
+                <div className="flex gap-1">
+                  <div className="w-2 h-2 bg-accent rounded-full animate-pulse" />
+                  <div className="w-2 h-2 bg-slate-300 rounded-full" />
+                  <div className="w-2 h-2 bg-slate-300 rounded-full" />
+                </div>
+                <span className="text-sm font-medium">Swipe horizontally for more testimonials</span>
+                <svg className="w-4 h-4 text-accent animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16l-4-4m0 0l4-4m-4 4h18" />
+                </svg>
+              </div>
             </div>
           </div>
         </div>
