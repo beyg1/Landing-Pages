@@ -274,26 +274,26 @@ function TestimonialCard({ testimonial }: { testimonial: typeof testimonials[0] 
         </blockquote>
 
         {/* Rating */}
-        <div className="relative z-10 flex gap-1 mb-6" aria-label={`${testimonial.rating} star rating`}>
+        <div className="relative z-10 flex gap-1 mb-6" role="img" aria-label={`${testimonial.rating} star rating`}>
           {[...Array(fullStars)].map((_, i) => (
             <Star
               key={`full-${i}`}
-              className="w-5 h-5 fill-yellow-500 text-yellow-500"
+              className="w-5 h-5 fill-yellow-400 text-yellow-400"
               aria-hidden="true"
             />
           ))}
           {hasHalfStar && (
             <div className="relative w-5 h-5">
-              <Star className="absolute w-5 h-5 text-yellow-500" aria-hidden="true" />
+              <Star className="absolute w-5 h-5 text-yellow-400" aria-hidden="true" />
               <div className="absolute inset-0 overflow-hidden w-1/2">
-                <Star className="w-5 h-5 fill-yellow-500 text-yellow-500" aria-hidden="true" />
+                <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" aria-hidden="true" />
               </div>
             </div>
           )}
           {[...Array(5 - Math.ceil(testimonial.rating))].map((_, i) => (
             <Star
               key={`empty-${i}`}
-              className="w-5 h-5 text-yellow-500"
+              className="w-5 h-5 text-yellow-400"
               aria-hidden="true"
             />
           ))}

@@ -223,11 +223,11 @@ export function FeaturedListingsSection() {
                     </div>
                     <button
                       type="button"
-                      className="group/btn inline-flex items-center gap-2 px-6 py-3 bg-accent/10 border border-accent/30 text-accent rounded-xl hover:bg-accent hover:text-white transition-all duration-300 hover:scale-105"
+                      className="group inline-flex items-center gap-2 px-6 py-3 bg-accent/10 border border-accent/30 text-accent rounded-xl hover:bg-accent hover:text-white transition-all duration-300 hover:scale-105"
                       aria-label={`View details for ${listing.title}`}
                     >
                       <span className="font-semibold">View</span>
-                      <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
+                      <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                     </button>
                   </div>
                 </div>

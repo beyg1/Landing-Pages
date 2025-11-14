@@ -52,9 +52,9 @@ export function HeroSection() {
                     : "opacity-0 -translate-y-8"
                 }`}
               >
-                <span className="inline-block px-4 py-2 bg-accent/10 backdrop-blur-sm border border-accent/20 rounded-full text-accent text-sm font-medium tracking-wide">
-                  🏡 Pakistan's Premier Real Estate Platform
-                </span>
+                <div className="inline-block px-4 py-2 bg-accent/10 backdrop-blur-sm border border-accent/20 rounded-full text-accent text-sm font-medium tracking-wide">
+                  🏡 <span className="sr-only">Pakistan's Premier Real Estate Platform</span><span aria-hidden="true">Pakistan's Premier Real Estate Platform</span>
+                </div>
               </div>
 
               {/* Main Heading - Left to Right */}
@@ -126,26 +126,28 @@ export function HeroSection() {
                     e.preventDefault();
                     scrollTo("#featured", { offset: 0 });
                   }}
-                  className="group relative inline-flex items-center justify-center px-10 py-5 text-lg font-semibold bg-accent text-white rounded-xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-accent/50"
+                  className="group relative inline-flex items-center justify-center px-10 py-5 text-lg font-semibold bg-accent text-black rounded-xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-accent/50"
                   aria-label="Search properties"
+                  role="button"
                 >
                   <span className="relative z-10 flex items-center gap-2">
-                    Search Properties
-                    <svg
-                      className="w-5 h-5 transition-transform group-hover:translate-x-1"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M17 8l4 4m0 0l-4 4m4-4H3"
-                      />
-                    </svg>
-                  </span>
-                  <div className="absolute inset-0 bg-linear-to-r from-accent to-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      Search Properties
+                      <svg
+                        className="w-5 h-5 transition-transform group-hover:translate-x-1"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        aria-hidden="true"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M17 8l4 4m0 0l-4 4m4-4H3"
+                        />
+                      </svg>
+                    </span>
+                  <div className="absolute inset-0 bg-linear-to-r from-accent/80 to-cyan-500/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </a>
 
                 <a
@@ -156,6 +158,7 @@ export function HeroSection() {
                   }}
                   className="group inline-flex items-center justify-center px-10 py-5 text-lg font-semibold bg-white/10 backdrop-blur-sm text-white border-2 border-white/20 rounded-xl hover:bg-white/20 hover:border-white/40 transition-all duration-300 hover:scale-105"
                   aria-label="List a property"
+                  role="button"
                 >
                   <span className="flex items-center gap-2">
                     List a Property
@@ -164,6 +167,7 @@ export function HeroSection() {
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
+                      aria-hidden="true"
                     >
                       <path
                         strokeLinecap="round"
