@@ -101,7 +101,7 @@ export function ServicesSection() {
             }`}
           >
             Complete Real Estate
-            <span className="block bg-linear-to-r from-accent via-blue-500 to-purple-500 bg-clip-text text-transparent">
+            <span className="block bg-linear-to-r from-accent text-[#aa272e] bg-clip-text">
               Solutions
             </span>
           </h2>
@@ -130,7 +130,7 @@ export function ServicesSection() {
                   isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-16"
                 }`}
                 style={{
-                  transitionDelay: isVisible ? `${index * 350}ms` : "0ms",
+                  transitionDelay: isVisible ? `${index * 450}ms` : "0ms",
                 }}
               >
                 {/* Card */}
@@ -189,7 +189,7 @@ export function ServicesSection() {
 
         {/* Bottom CTA Section */}
         <div
-          className={`mt-20 text-center transition-all duration-700 delay-700 ${
+          className={`mt-20 text-center transition-all duration-700 delay-2000 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >

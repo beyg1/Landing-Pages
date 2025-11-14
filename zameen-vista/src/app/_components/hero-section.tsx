@@ -21,7 +21,9 @@ export function HeroSection() {
           alt="Modern Pakistani architecture"
           fill
           priority
-          className="object-cover scale-105"
+          className={`object-cover transition-transform duration-2000 ease-out ${
+            isVisible ? "scale-100" : "scale-[2]"
+          }`}
         />
         {/* Multi-layer gradient overlay for depth */}
         <div className="absolute inset-0 bg-linear-to-br from-curtain-dark/95 via-curtain-dark/70 to-transparent" />
@@ -177,11 +179,14 @@ export function HeroSection() {
             {/* Visual Element - Right Side */}
             <div className="lg:col-span-5 relative hidden lg:block">
               <div
-                className={`transition-all duration-1000 delay-600 ${
+                className={`transition-all duration-1000 ease-out delay-600 ${
                   isVisible
-                    ? "opacity-100 translate-x-0 rotate-0"
-                    : "opacity-0 translate-x-12 rotate-6"
+                    ? "opacity-100 scale-100"
+                    : "opacity-0 scale-75"
                 }`}
+                style={{
+                  transformOrigin: 'center center',
+                }}
               >
                 {/* Floating Stats Card */}
                 <div className="relative">
@@ -270,29 +275,6 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* Scroll Indicator */}
-      <div
-        className={`absolute bottom-12 left-1/2 -translate-x-1/2 z-10 transition-all duration-1000 delay-700 ${
-          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-        }`}
-      >
-        <div className="flex flex-col items-center gap-2 animate-bounce">
-          <span className="text-xs text-gray-400 uppercase tracking-widest">Scroll</span>
-          <svg
-            className="w-6 h-6 text-accent"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M19 14l-7 7m0 0l-7-7m7 7V3"
-            />
-          </svg>
-        </div>
-      </div>
     </section>
   );
 }

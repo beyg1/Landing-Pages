@@ -152,7 +152,7 @@ export function TestimonialsSection() {
             }`}
           >
             Loved by Thousands
-            <span className="block bg-linear-to-r from-accent via-blue-500 to-purple-500 bg-clip-text text-transparent">
+            <span className="block bg-linear-to-r from-accent text-[#aa272e] bg-clip-text">
               Across Pakistan
             </span>
           </h2>
@@ -207,7 +207,7 @@ export function TestimonialsSection() {
               key={idx}
               className="text-center p-6 bg-white/80 backdrop-blur-sm border border-gray-200/50 rounded-2xl hover:border-accent/30 transition-all duration-300"
             >
-              <div className="font-display text-3xl lg:text-4xl font-bold bg-linear-to-r from-accent to-blue-500 bg-clip-text text-transparent mb-2">
+              <div className="font-display text-3xl lg:text-4xl font-bold bg-linear-to-r text-[#aa272e] bg-clip-text  mb-2">
                 {stat.value}
               </div>
               <div className="text-sm text-slate-600">{stat.label}</div>
@@ -277,6 +277,8 @@ function TestimonialCard({ testimonial }: { testimonial: typeof testimonials[0] 
               src={testimonial.avatar}
               alt={`${testimonial.name} profile picture`}
               fill
+              sizes="56px"
+              loading="eager"
               className="object-cover"
             />
           </div>
@@ -284,8 +286,8 @@ function TestimonialCard({ testimonial }: { testimonial: typeof testimonials[0] 
             <h3 className="font-semibold text-slate-900 text-lg">
               {testimonial.name}
             </h3>
-            <p className="text-sm text-slate-600">{testimonial.role}</p>
-            <p className="text-xs text-accent">{testimonial.city}</p>
+            <p className="text-sm text-slate-900">{testimonial.role}</p>
+            <p className="text-xs text-[#aa272e]">{testimonial.city}</p>
           </div>
         </div>
 
