@@ -1,7 +1,7 @@
 "use client";
 
 import { useReveal } from "./use-reveal";
-import { Home, DollarSign, Key, TrendingUp, CheckCircle2, ArrowRight } from "lucide-react";
+import { Home, DollarSign, Key, TrendingUp, CheckCircle2, ArrowRight, Users } from "lucide-react";
 
 const services = [
   {
@@ -52,22 +52,34 @@ const services = [
     iconColor: "text-orange-500",
     featured: false,
   },
+  {
+    icon: Users,
+    title: "Agent Services",
+    description:
+      "Connect with experienced real estate agents who provide personalized guidance throughout your property journey.",
+    features: ["Expert Agents", "Personalized Service", "Local Knowledge"],
+    cta: "Find an Agent",
+    href: "#contact",
+    gradient: "from-indigo-500/10 to-violet-500/10",
+    iconColor: "text-indigo-500",
+    featured: false,
+  },
 ];
 
 export function ServicesSection() {
-  const { ref, isVisible } = useReveal({ threshold: 0.1 });
+  const { ref, isVisible } = useReveal({ threshold: 0.2 });
 
   return (
     <section
       id="services"
       ref={ref}
-      className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-curtain-light via-white to-gray-50 overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center bg-linear-to-br from-curtain-light via-white to-gray-50 overflow-hidden"
     >
       {/* Decorative Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 right-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl" />
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-br from-accent/5 to-purple-500/5 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-linear-to-br from-accent/5 to-purple-500/5 rounded-full blur-3xl" />
       </div>
 
       <div className="relative container mx-auto px-6 py-24 lg:py-32">
@@ -89,7 +101,7 @@ export function ServicesSection() {
             }`}
           >
             Complete Real Estate
-            <span className="block bg-gradient-to-r from-accent via-blue-500 to-purple-500 bg-clip-text text-transparent">
+            <span className="block bg-linear-to-r from-accent via-blue-500 to-purple-500 bg-clip-text text-transparent">
               Solutions
             </span>
           </h2>
@@ -114,22 +126,22 @@ export function ServicesSection() {
                 key={service.title}
                 className={`group relative ${
                   isFeatured ? "lg:col-span-2 lg:row-span-1" : ""
-                } transition-all duration-700 delay-${index * 100} ${
-                  isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
+                } transition-all duration-1500 ease-out ${
+                  isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-16"
                 }`}
                 style={{
-                  transitionDelay: isVisible ? `${index * 150}ms` : "0ms",
+                  transitionDelay: isVisible ? `${index * 350}ms` : "0ms",
                 }}
               >
                 {/* Card */}
                 <div className="relative h-full bg-white/80 backdrop-blur-sm border border-gray-200/50 rounded-3xl p-8 lg:p-10 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden">
                   {/* Gradient Background */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+                  <div className={`absolute inset-0 bg-linear-to-br ${service.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
                   
                   {/* Content */}
                   <div className="relative z-10">
                     {/* Icon */}
-                    <div className={`inline-flex items-center justify-center w-16 h-16 lg:w-20 lg:h-20 bg-gradient-to-br ${service.gradient} rounded-2xl mb-6 group-hover:scale-110 transition-transform duration-500`}>
+                    <div className={`inline-flex items-center justify-center w-16 h-16 lg:w-20 lg:h-20 bg-linear-to-br ${service.gradient} rounded-2xl mb-6 group-hover:scale-110 transition-transform duration-500`}>
                       <Icon className={`w-8 h-8 lg:w-10 lg:h-10 ${service.iconColor}`} strokeWidth={1.5} />
                     </div>
 
@@ -150,7 +162,7 @@ export function ServicesSection() {
                           key={idx}
                           className="flex items-center gap-3 text-sm lg:text-base"
                         >
-                          <CheckCircle2 className={`w-5 h-5 ${service.iconColor} flex-shrink-0`} />
+                          <CheckCircle2 className={`w-5 h-5 ${service.iconColor} shrink-0`} />
                           <span className="text-slate-700">{feature}</span>
                         </div>
                       ))}
@@ -159,7 +171,7 @@ export function ServicesSection() {
                     {/* CTA */}
                     <a
                       href={service.href}
-                      className={`inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r ${service.gradient} border-2 border-transparent group-hover:border-current rounded-xl font-semibold ${service.iconColor} transition-all duration-300 hover:gap-4`}
+                      className={`inline-flex items-center gap-2 px-6 py-3 bg-linear-to-r ${service.gradient} border-2 border-transparent group-hover:border-current rounded-xl font-semibold ${service.iconColor} transition-all duration-300 hover:gap-4`}
                       aria-label={`${service.cta} - ${service.title}`}
                     >
                       {service.cta}
@@ -168,7 +180,7 @@ export function ServicesSection() {
                   </div>
 
                   {/* Decorative Corner Element */}
-                  <div className={`absolute -top-12 -right-12 w-32 h-32 bg-gradient-to-br ${service.gradient} rounded-full blur-2xl opacity-0 group-hover:opacity-50 transition-opacity duration-500`} />
+                  <div className={`absolute -top-12 -right-12 w-32 h-32 bg-linear-to-br ${service.gradient} rounded-full blur-2xl opacity-0 group-hover:opacity-50 transition-opacity duration-500`} />
                 </div>
               </div>
             );
@@ -181,7 +193,7 @@ export function ServicesSection() {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          <div className="inline-flex flex-col sm:flex-row items-center gap-4 bg-gradient-to-r from-accent/10 via-blue-500/10 to-purple-500/10 backdrop-blur-sm border border-accent/20 rounded-2xl p-8 shadow-xl">
+          <div className="inline-flex flex-col sm:flex-row items-center gap-4 bg-linear-to-r from-accent/10 via-blue-500/10 to-purple-500/10 backdrop-blur-sm border border-accent/20 rounded-2xl p-8 shadow-xl">
             <div className="text-left">
               <h3 className="font-display text-2xl text-slate-900 mb-2">
                 Need Custom Solutions?

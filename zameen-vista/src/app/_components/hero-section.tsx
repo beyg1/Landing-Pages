@@ -24,12 +24,12 @@ export function HeroSection() {
           className="object-cover scale-105"
         />
         {/* Multi-layer gradient overlay for depth */}
-        <div className="absolute inset-0 bg-gradient-to-br from-curtain-dark/95 via-curtain-dark/70 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-curtain-dark via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-br from-curtain-dark/95 via-curtain-dark/70 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-t from-curtain-dark via-transparent to-transparent" />
       </div>
 
       {/* Animated gradient orbs for visual interest */}
-      <div className="absolute inset-0 z-[1] overflow-hidden pointer-events-none">
+      <div className="absolute inset-0 z-1 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 -left-1/4 w-96 h-96 bg-accent/20 rounded-full blur-3xl animate-pulse" />
         <div className="absolute bottom-1/4 -right-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl animate-pulse delay-1000" />
       </div>
@@ -65,7 +65,7 @@ export function HeroSection() {
                 <span className="block font-display text-[clamp(3rem,8vw,7rem)] leading-[0.95] tracking-tight mb-4">
                   Find Your
                 </span>
-                <span className="block font-display text-[clamp(3rem,8vw,7rem)] leading-[0.95] tracking-tight bg-gradient-to-r from-white via-gray-100 to-accent bg-clip-text text-transparent">
+                <span className="block font-display text-[clamp(3rem,8vw,7rem)] leading-[0.95] tracking-tight bg-linear-to-r from-white via-gray-100 to-accent bg-clip-text text-transparent">
                   Dream Home
                 </span>
                 <span className="block font-display text-[clamp(2rem,5vw,4.5rem)] leading-[0.95] tracking-tight text-gray-300 mt-2">
@@ -142,7 +142,7 @@ export function HeroSection() {
                       />
                     </svg>
                   </span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-accent to-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute inset-0 bg-linear-to-r from-accent to-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </a>
 
                 <a
