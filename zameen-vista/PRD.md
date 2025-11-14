@@ -4,12 +4,14 @@ Project Overview
 Project name: Zameen Vista (placeholder)
 
 Technology stack:
-- Next.js App Router (React, TypeScript) with src/app structure
-- Tailwind CSS for utility-first styling
-- Lenis for smooth scrolling
+- Next.js 16 App Router (React 19, TypeScript 5) with src/app structure
+- Tailwind CSS v4 with inline theme configuration and PostCSS v4
+- Lenis v1.3+ for smooth scrolling with manual raf control
+- Lucide React icons for consistent iconography
 - pnpm for dependency management
 - Next.js Image and Metadata APIs for performance and SEO
-- Optional: MDX support and analytics integrations as needed
+- Custom TypeScript utilities (useReveal hook, SmoothScrollProvider)
+- JSON-LD structured data and comprehensive meta tags
 
 Purpose: Create a modern, high-converting landing page for a Pakistani real-estate website offering: Buying & Selling (Plots, Houses, Flats, Shops) and Renting (Plots, Houses, Flats, Shops). The page must be visually striking, fast, accessible, and easy to maintain. It is implemented as a Next.js single-scroll landing experience using App Router, composed from modular React components, with smooth scrolling via Lenis and a curtain effect achieved by alternating contrasting background colors on adjacent sections.
 
@@ -29,41 +31,39 @@ Provide frictionless contact options.
 
 Page Structure (sections)
 
-The page is a single Next.js App Router page (src/app/page.tsx) structured as 5 major sections arranged vertically, implemented as reusable React components:
+The page is a single Next.js App Router page (src/app/page.tsx) structured as 5 major sections arranged vertically, implemented as reusable React components with advanced animations and interactions:
 
-Hero — Bold headline, large background image, quick service filter, primary CTA (Search/List Property), animated entrance.
+Hero — Ultra-modern hero with parallax background image, floating stats card, animated gradient orbs, asymmetric layout with complex typography scaling (clamp-based responsive text), trust indicators with animated pulses, dual CTAs with hover effects, and staggered entrance animations.
 
-Services — Four clear service cards (Buying, Selling, Renting, Valuation/Consultation) with icons, brief copy, and CTAs.
+Services — Sophisticated bento-style grid layout with 5 service cards (Buying, Selling, Renting, Valuation, Agent Services) featuring hover gradient backgrounds, feature lists with check icons, prominent CTAs, and a bottom custom solutions CTA banner. Each card has unique gradient themes and corner decorative elements.
 
-Featured Listings (professional extra section) — Carousel or grid of high-quality property cards (image, short meta, price, CTA). Images are Unsplash placeholders until real images are provided.
+Featured Listings — Premium property showcase with 6 featured listings in a responsive grid, decorative background orbs, featured/type badges, detailed property cards with hover effects, price formatting, property details (beds/baths/area) with icons, view buttons, and corner glow effects on hover.
 
-Testimonials — Rotating/revealing quotes from satisfied customers (with photos or initials), with subtle micro-animations.
+Testimonials — Auto-scrolling horizontal carousel with 10 testimonials, star ratings (including half-stars), author profiles with avatars, animated cards with hover effects, gradient overlays, and bottom stats section with animated counters.
 
-Contact Us — Short contact form (Name, Phone, Email, Message, Service interest), WhatsApp quick link, phone tap-to-call on mobile, office address and map embed placeholder.
+Contact Us — Comprehensive contact section with form validation, contact information cards (phone/WhatsApp/email/office), business hours, success/error states, smooth animations, and multiple contact methods.
 
 Note on section backgrounds: Sections should alternate between two contrasting background colors (e.g., deep indigo and off-white / cream) to create a curtain-like effect on scroll with Lenis smoothing.
 
 Functional Requirements
 
-Smooth scroll on all devices through Lenis with natural easing and section snap feel (but not forced snap). Lenis must be integrated following official documentation in a dedicated Next.js client component (e.g., SmoothScrollProvider) used in layout.tsx or page.tsx.
+Smooth scroll on all devices through Lenis with natural easing and section snap feel (but not forced snap). Lenis is integrated via a dedicated SmoothScrollProvider client component that manages a manual requestAnimationFrame loop for full control, with proper cleanup and context API for programmatic scrolling.
 
-Section background contrast: adjacent sections use contrasting colors to produce a curtain/striped effect when scrolling.
+Section background contrast: alternating curtain-dark (#0f172a) and curtain-light (#fff9f1) backgrounds create a curtain effect with decorative gradient orbs and blur effects for visual depth.
 
-Responsive design (desktop/tablet/mobile). Hero hero copy scales up on desktop; cards stack on mobile.
+Responsive design (desktop/tablet/mobile) with fluid typography using clamp() functions for scalable text (e.g., text-[clamp(3rem,8vw,7rem)]), cards adapt to grid layouts, and mobile-first approach with progressive enhancement.
 
-Images are high-quality Unsplash placeholders; use ?auto=format&fit=crop&w=...&q=... query params for optimized delivery.
+Images are high-quality Unsplash placeholders with optimized query params (?auto=format&fit=crop&w=...&q=...); Next.js Image component handles lazy loading, responsive sizing, and performance optimizations automatically.
 
-Lazy loading + image load animations (fade + scale) using IntersectionObserver.
+Advanced animations: intersection observer-based reveal animations with staggered delays, parallax effects on hero background, floating gradient orbs, hover micro-interactions on cards (scale, border color, glow effects), auto-scrolling testimonials carousel (15s duration, pauses on hover), and smooth scroll-to navigation.
 
-Two CTAs in Hero: "Search properties" and "List a property". Sticky header with CTA on scroll.
+Hero CTAs: "Search Properties" and "List a Property" with Lenis-powered smooth scrolling to sections, hover gradient effects, and SVG icons with transition animations.
 
-Contact form posts to a configurable endpoint (Netlify Functions / serverless or API URL). Include client-side validation and reCAPTCHA v3 support placeholder.
+Contact form: POST to /api/contact endpoint with TypeScript validation, form state management, success/error displays, and structured data handling; includes WhatsApp, phone, and email contact methods with tap-to-call links.
 
-SEO friendly: semantic HTML, meta tags, Open Graph tags, structured data (JSON-LD for Organization and WebPage). Social preview image placeholder.
+SEO & Performance: Comprehensive metadata (title, description, keywords, OpenGraph, Twitter cards), JSON-LD structured data for Organization schema, semantic HTML landmarks, Lighthouse target >= 90 (achieved through Next.js Image optimization, App Router streaming, Tailwind v4, and minimal client-side JS).
 
-Performance: Lighthouse target >= 90 mobile & desktop; leverage Next.js optimizations (Next/Image for responsive images, App Router streaming where appropriate, automatic code splitting, Tailwind JIT utilities). Avoid unnecessary client-side JS; prefer Server Components where possible and use Client Components only where interactivity is required.
-
-Accessibility: WCAG 2.1 AA (keyboard focus states, alt text, ARIA labels, color contrast >= 4.5:1 for body text).
+Accessibility: WCAG 2.1 AA compliance with proper ARIA labels, keyboard navigation, color contrast ratios (>=4.5:1), focus states, alt text, semantic landmarks, and screen reader support.
 
 Non-Functional Requirements
 
@@ -79,19 +79,13 @@ Security: sanitize inputs server-side; use HTTPS for all endpoints.
 
 Visual & UX Requirements
 
-Typography: large, eye-catching headings (display scale), stylish font pair (one display font + one readable sans-serif). Use Google Fonts.
+Typography: Ultra-responsive fluid typography using clamp() functions for scalable headings (e.g., clamp(3rem, 8vw, 7rem)), Playfair Display for display text (serif) and Inter for body text (sans-serif), loaded via Next.js font optimization.
 
-Animations: entrance animations for sections (staggered), image load animations, subtle hover micro-interactions for cards. Keep animations performant (use transform and opacity only).
+Advanced Animations: IntersectionObserver-powered reveal animations with configurable thresholds and staggered delays, parallax background scaling on hero, floating animated orbs with blur effects, auto-scrolling testimonials carousel with hover pause, card hover effects (scale, border changes, glow effects), and smooth Lenis-powered navigation. All animations use transform/opacity only for 60fps performance.
 
-Colors: two contrasting background palettes. Example palettes (replaceable):
+Color System: Two contrasting curtain backgrounds - curtain-dark (#0f172a, indigo-900) for dark sections and curtain-light (#fff9f1, warm cream) for light sections, with accent color (#06b6d4, cyan-500) for CTAs and highlights. Decorative gradients use cyan, blue, purple, and green variations.
 
-Palette A (Dark curtain): Indigo 900 (#0f172a) or Deep Navy.
-
-Palette B (Light curtain): Warm Cream (#FFF9F1) or Off-white.
-
-Accent: Vibrant Teal (#06B6D4) or Marigold (#F59E0B) for CTAs.
-
-Imagery: Unsplash curated photos for Pakistani architecture / urban scenes; overlay gradients where text sits on images for contrast.
+Imagery: Curated Unsplash photos optimized with Next.js Image component, responsive sizing with priority loading for hero, optimized query parameters for performance, and gradient overlays for text contrast and depth effects.
 
 Content Requirements
 
