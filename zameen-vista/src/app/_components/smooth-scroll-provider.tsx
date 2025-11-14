@@ -44,7 +44,6 @@ export function SmoothScrollProvider({
 }: SmoothScrollProviderProps) {
   const lenisRef = useRef<Lenis | null>(null);
   const rafIdRef = useRef<number | null>(null);
-  const [, setReady] = useState(false); // trigger re-render once Lenis is attached
 
   useEffect(() => {
     const lenis = new Lenis({
@@ -66,7 +65,6 @@ export function SmoothScrollProvider({
     };
 
     rafIdRef.current = requestAnimationFrame(raf);
-    setReady(true);
 
     return () => {
       if (rafIdRef.current !== null) {

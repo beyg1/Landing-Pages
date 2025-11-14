@@ -17,27 +17,27 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Zameen Vista - Find Your Next Home in Pakistan",
+  title: "Zameen Vista - Portfolio Project by AbdurRab | React Developer",
   description:
-    "Buy, sell or rent properties with verified listings and expert support. Fast, secure, trusted real estate in Pakistan - serving Islamabad, Lahore, Karachi & major cities.",
+    "Portfolio project made for Real estate giants in Islamabad, Lahore, Karachi, Pindi and other big cities. by AbdurRab a react developer who can be hired at mirza-dev.vercel.app",
   keywords: [
-    "real estate Pakistan",
-    "property for sale",
+    "real estate in Pakistan",
+    "property for sale in Lahore",
     "rent property",
-    "buy house Pakistan",
+    "buy house in Pakistan",
     "Islamabad property",
     "Karachi property",
     "Lahore property",
   ],
   authors: [{ name: "Zameen Vista" }],
   openGraph: {
-    title: "Zameen Vista - Find Your Next Home in Pakistan",
+    title: "Zameen Vista - Portfolio Project by AbdurRab | React Developer",
     description:
-      "Buy, sell or rent properties with verified listings and expert support. Fast, secure, trusted real estate in Pakistan - serving Islamabad, Lahore, Karachi & major cities.",
+      "Portfolio project made for Real estate giants in Islamabad, Lahore, Karachi, Pindi and other big cities. by AbdurRab a react developer who can be hired at mirza-dev.vercel.app",
     type: "website",
     locale: "en_US",
     siteName: "Zameen Vista",
-    url: "https://zameenvista.com",
+    url: "https://zameen-vista.vercel.app",
     images: [
       {
         url: "https://images.unsplash.com/photo-1605146769289-440113cc3d00?auto=format&fit=crop&w=1200&q=80",
@@ -49,9 +49,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Zameen Vista - Find Your Next Home in Pakistan",
+    title: "Zameen Vista - Portfolio Project by AbdurRab | React Developer",
     description:
-      "Buy, sell or rent properties with verified listings and expert support. Fast, secure, trusted real estate in Pakistan - serving Islamabad, Lahore, Karachi & major cities.",
+      "Portfolio project made for Real estate giants in Islamabad, Lahore, Karachi, Pindi and other big cities. by AbdurRab a react developer who can be hired at mirza-dev.vercel.app",
     images: ["https://images.unsplash.com/photo-1605146769289-440113cc3d00?auto=format&fit=crop&w=1200&q=80"],
   },
   robots: {
@@ -66,8 +66,7 @@ const jsonLd = {
   name: "Zameen Vista",
   description:
     "Pakistan's trusted real estate platform for buying, selling, and renting properties in Islamabad, Lahore, Karachi, and major cities.",
-  url: "https://zameenvista.com",
-  logo: "https://zameenvista.com/logo.png",
+  url: "https://zameen-vista.vercel.app",
   image: "https://images.unsplash.com/photo-1605146769289-440113cc3d00?auto=format&fit=crop&w=1200&q=80",
   telephone: "+92-300-1234567",
   email: "info@zameenvista.com",
@@ -139,12 +138,7 @@ const jsonLd = {
     reviewCount: "8500",
     bestRating: "5",
     worstRating: "1"
-  },
-  sameAs: [
-    "https://www.facebook.com/zameenvista",
-    "https://www.instagram.com/zameenvista",
-    "https://www.linkedin.com/company/zameenvista"
-  ]
+  }
 };
 
 export default function RootLayout({
