@@ -21,6 +21,7 @@ export function HeroSection() {
           alt="Modern Pakistani architecture"
           fill
           priority
+          sizes="100vw"
           className={`object-cover transition-transform duration-2000 ease-out ${
             isVisible ? "scale-100" : "scale-[2]"
           }`}
