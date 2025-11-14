@@ -308,6 +308,7 @@ function TestimonialCard({ testimonial }: { testimonial: typeof testimonials[0] 
               fill
               sizes="56px"
               loading="eager"
+              quality={75}
               className="object-cover"
             />
           </div>

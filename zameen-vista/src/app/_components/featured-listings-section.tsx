@@ -174,7 +174,7 @@ export function FeaturedListingsSection() {
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     priority={index < 5}
-                    quality={85}
+                    quality={75}
                     className="object-cover group-hover:scale-110 transition-transform duration-700"
                   />
                   {/* Gradient Overlay */}

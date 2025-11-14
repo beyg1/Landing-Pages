@@ -17,7 +17,7 @@ export function HeroSection() {
       {/* Background Image with Parallax Effect */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="https://images.unsplash.com/photo-1605146769289-440113cc3d00?auto=format&fit=crop&w=2000&q=80"
+          src="https://images.unsplash.com/photo-1605146769289-440113cc3d00?auto=format&fit=crop&w=2000&q=75"
           alt="Modern Pakistani architecture"
           fill
           priority
@@ -120,15 +120,12 @@ export function HeroSection() {
                     : "opacity-0 translate-y-12"
                 }`}
               >
-                <a
-                  href="#featured"
-                  onClick={(e) => {
-                    e.preventDefault();
+                <button
+                  onClick={() => {
                     scrollTo("#featured", { offset: 0 });
                   }}
                   className="group relative inline-flex items-center justify-center px-10 py-5 text-lg font-semibold bg-accent text-black rounded-xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-accent/50"
                   aria-label="Search properties"
-                  role="button"
                 >
                   <span className="relative z-10 flex items-center gap-2">
                       Search Properties
@@ -148,17 +145,14 @@ export function HeroSection() {
                       </svg>
                     </span>
                   <div className="absolute inset-0 bg-linear-to-r from-accent/80 to-cyan-500/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </a>
+                </button>
 
-                <a
-                  href="#contact"
-                  onClick={(e) => {
-                    e.preventDefault();
+                <button
+                  onClick={() => {
                     scrollTo("#contact", { offset: 0 });
                   }}
                   className="group inline-flex items-center justify-center px-10 py-5 text-lg font-semibold bg-white/10 backdrop-blur-sm text-white border-2 border-white/20 rounded-xl hover:bg-white/20 hover:border-white/40 transition-all duration-300 hover:scale-105"
                   aria-label="List a property"
-                  role="button"
                 >
                   <span className="flex items-center gap-2">
                     List a Property
@@ -177,7 +171,7 @@ export function HeroSection() {
                       />
                     </svg>
                   </span>
-                </a>
+                </button>
               </div>
             </div>
 

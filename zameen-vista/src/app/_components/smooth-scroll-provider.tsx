@@ -46,25 +46,35 @@ export function SmoothScrollProvider({
   const rafIdRef = useRef<number | null>(null);
 
   useEffect(() => {
-    const lenis = new Lenis({
-      // Defaults tuned for this landing page; can be overridden via `options`
-      smoothWheel: true,
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      autoRaf: false, // manual raf for full control
-      autoResize: true,
-      ...options,
-    });
+    // Defer Lenis initialization to avoid blocking initial render
+    const initializeLenis = () => {
+      const lenis = new Lenis({
+        // Defaults tuned for this landing page; can be overridden via `options`
+        smoothWheel: true,
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        autoRaf: false, // manual raf for full control
+        autoResize: true,
+        ...options,
+      });
 
-    lenisRef.current = lenis;
+      lenisRef.current = lenis;
 
-    const raf = (time: number) => {
-      if (!lenisRef.current) return;
-      lenisRef.current.raf(time);
+      const raf = (time: number) => {
+        if (!lenisRef.current) return;
+        lenisRef.current.raf(time);
+        rafIdRef.current = requestAnimationFrame(raf);
+      };
+
       rafIdRef.current = requestAnimationFrame(raf);
     };
 
-    rafIdRef.current = requestAnimationFrame(raf);
+    // Use requestIdleCallback if available, otherwise setTimeout
+    if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+      requestIdleCallback(initializeLenis);
+    } else {
+      setTimeout(initializeLenis, 100);
+    }
 
     return () => {
       if (rafIdRef.current !== null) {
