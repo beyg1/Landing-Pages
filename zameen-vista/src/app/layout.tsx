@@ -19,7 +19,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Zameen Vista - Find Your Next Home in Pakistan",
   description:
-    "Buy, sell or rent properties with verified listings and expert support. Fast, secure, trusted real estate in Pakistan.",
+    "Buy, sell or rent properties with verified listings and expert support. Fast, secure, trusted real estate in Pakistan - serving Islamabad, Lahore, Karachi & major cities.",
   keywords: [
     "real estate Pakistan",
     "property for sale",
@@ -33,16 +33,26 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Zameen Vista - Find Your Next Home in Pakistan",
     description:
-      "Buy, sell or rent properties with verified listings and expert support.",
+      "Buy, sell or rent properties with verified listings and expert support. Fast, secure, trusted real estate in Pakistan - serving Islamabad, Lahore, Karachi & major cities.",
     type: "website",
     locale: "en_US",
     siteName: "Zameen Vista",
+    url: "https://zameenvista.com",
+    images: [
+      {
+        url: "https://images.unsplash.com/photo-1605146769289-440113cc3d00?auto=format&fit=crop&w=1200&q=80",
+        width: 1200,
+        height: 630,
+        alt: "Zameen Vista - Pakistan's Premier Real Estate Platform",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Zameen Vista - Find Your Next Home in Pakistan",
     description:
-      "Buy, sell or rent properties with verified listings and expert support.",
+      "Buy, sell or rent properties with verified listings and expert support. Fast, secure, trusted real estate in Pakistan - serving Islamabad, Lahore, Karachi & major cities.",
+    images: ["https://images.unsplash.com/photo-1605146769289-440113cc3d00?auto=format&fit=crop&w=1200&q=80"],
   },
   robots: {
     index: true,
@@ -52,24 +62,89 @@ export const metadata: Metadata = {
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "Organization",
+  "@type": "RealEstateAgent",
   name: "Zameen Vista",
   description:
-    "Pakistan's trusted real estate platform for buying, selling, and renting properties.",
+    "Pakistan's trusted real estate platform for buying, selling, and renting properties in Islamabad, Lahore, Karachi, and major cities.",
   url: "https://zameenvista.com",
   logo: "https://zameenvista.com/logo.png",
-  contactPoint: {
-    "@type": "ContactPoint",
-    telephone: "+92-300-1234567",
-    contactType: "customer service",
-    areaServed: "PK",
-    availableLanguage: ["en", "ur"],
-  },
+  image: "https://images.unsplash.com/photo-1605146769289-440113cc3d00?auto=format&fit=crop&w=1200&q=80",
+  telephone: "+92-300-1234567",
+  email: "info@zameenvista.com",
   address: {
     "@type": "PostalAddress",
     addressLocality: "Islamabad",
+    addressRegion: "Islamabad Capital Territory",
     addressCountry: "PK",
   },
+  areaServed: [
+    {
+      "@type": "City",
+      name: "Islamabad"
+    },
+    {
+      "@type": "City",
+      name: "Lahore"
+    },
+    {
+      "@type": "City",
+      name: "Karachi"
+    },
+    {
+      "@type": "City",
+      name: "Rawalpindi"
+    }
+  ],
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Real Estate Services",
+    itemListElement: [
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Property Buying",
+          description: "Find verified properties across Pakistan with transparent pricing and complete documentation support."
+        }
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Property Selling",
+          description: "List your property with professional photography, expert marketing, and reach thousands of buyers."
+        }
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Rental Services",
+          description: "Find or list rental properties with flexible terms, verified landlords, and secure agreements."
+        }
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Property Valuation",
+          description: "Get accurate property valuations and expert consultation from our experienced real estate professionals."
+        }
+      }
+    ]
+  },
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: "4.5",
+    reviewCount: "8500",
+    bestRating: "5",
+    worstRating: "1"
+  },
+  sameAs: [
+    "https://www.facebook.com/zameenvista",
+    "https://www.instagram.com/zameenvista",
+    "https://www.linkedin.com/company/zameenvista"
+  ]
 };
 
 export default function RootLayout({

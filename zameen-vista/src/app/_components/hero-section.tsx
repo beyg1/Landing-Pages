@@ -184,7 +184,7 @@ export function HeroSection() {
             {/* Visual Element - Right Side - Scale Animation */}
             <div className="lg:col-span-5 relative hidden lg:block">
               <div
-                className={`transition-all duration-1000 ease-out delay-2200 ${
+                className={`transition-all duration-1000 ease-out delay-1800 ${
                   isVisible
                     ? "opacity-100 scale-100"
                     : "opacity-0 scale-75"
