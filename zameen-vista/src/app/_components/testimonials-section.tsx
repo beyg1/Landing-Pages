@@ -46,7 +46,7 @@ const testimonials = [
     role: "Investor",
     city: "Rawalpindi",
     avatar:
-      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=150&q=80",
+      "https://images.unsplash.com/photo-1639323949180-772f1932c225?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb",
     rating: 4.5,
   },
   {
@@ -138,7 +138,9 @@ export function TestimonialsSection() {
         <div className="text-center mb-20 max-w-4xl mx-auto">
           <div
             className={`transition-all duration-700 ${
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+              isVisible
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-8"
             }`}
           >
             <span className="inline-block px-4 py-2 bg-accent/10 border border-accent/20 rounded-full text-accent text-sm font-medium tracking-wide mb-6">
@@ -148,7 +150,9 @@ export function TestimonialsSection() {
 
           <h2
             className={`font-display text-[clamp(2.5rem,6vw,4.5rem)] leading-tight mb-6 transition-all duration-700 delay-100 ${
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+              isVisible
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-8"
             }`}
           >
             Loved by Thousands
@@ -159,10 +163,13 @@ export function TestimonialsSection() {
 
           <p
             className={`text-xl md:text-2xl text-slate-600 max-w-3xl mx-auto transition-all duration-700 delay-200 ${
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+              isVisible
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-8"
             }`}
           >
-            Real stories from real people who found their dream properties with us
+            Real stories from real people who found their dream properties with
+            us
           </p>
         </div>
 
@@ -180,14 +187,23 @@ export function TestimonialsSection() {
 
             {/* Scrolling Container */}
             <div className="overflow-hidden">
-              <div className="flex gap-6 animate-scroll-rtl">
+              <div
+                className="flex gap-6 animate-scroll-rtl w-max"
+                style={{ animationDuration: "60s" }}
+              >
                 {/* First set of testimonials */}
                 {testimonials.map((testimonial) => (
-                  <TestimonialCard key={`first-${testimonial.id}`} testimonial={testimonial} />
+                  <TestimonialCard
+                    key={`first-${testimonial.id}`}
+                    testimonial={testimonial}
+                  />
                 ))}
                 {/* Duplicate set for seamless loop */}
                 {testimonials.map((testimonial) => (
-                  <TestimonialCard key={`second-${testimonial.id}`} testimonial={testimonial} />
+                  <TestimonialCard
+                    key={`second-${testimonial.id}`}
+                    testimonial={testimonial}
+                  />
                 ))}
               </div>
             </div>
@@ -198,7 +214,10 @@ export function TestimonialsSection() {
             <div className="overflow-x-auto pb-4 scrollbar-hide">
               <div className="flex gap-6 w-max px-6">
                 {testimonials.map((testimonial) => (
-                  <TestimonialCard key={`mobile-${testimonial.id}`} testimonial={testimonial} />
+                  <TestimonialCard
+                    key={`mobile-${testimonial.id}`}
+                    testimonial={testimonial}
+                  />
                 ))}
               </div>
             </div>
@@ -211,9 +230,21 @@ export function TestimonialsSection() {
                   <div className="w-2 h-2 bg-slate-300 rounded-full" />
                   <div className="w-2 h-2 bg-slate-300 rounded-full" />
                 </div>
-                <span className="text-sm font-medium">Swipe horizontally for more testimonials</span>
-                <svg className="w-4 h-4 text-accent animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16l-4-4m0 0l4-4m-4 4h18" />
+                <span className="text-sm font-medium">
+                  Swipe horizontally for more testimonials
+                </span>
+                <svg
+                  className="w-4 h-4 text-accent animate-bounce"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M7 16l-4-4m0 0l4-4m-4 4h18"
+                  />
                 </svg>
               </div>
             </div>
@@ -248,7 +279,11 @@ export function TestimonialsSection() {
   );
 }
 
-function TestimonialCard({ testimonial }: { testimonial: typeof testimonials[0] }) {
+function TestimonialCard({
+  testimonial,
+}: {
+  testimonial: (typeof testimonials)[0];
+}) {
   const fullStars = Math.floor(testimonial.rating);
   const hasHalfStar = testimonial.rating % 1 !== 0;
 
@@ -274,7 +309,11 @@ function TestimonialCard({ testimonial }: { testimonial: typeof testimonials[0] 
         </blockquote>
 
         {/* Rating */}
-        <div className="relative z-10 flex gap-1 mb-6" role="img" aria-label={`${testimonial.rating} star rating`}>
+        <div
+          className="relative z-10 flex gap-1 mb-6"
+          role="img"
+          aria-label={`${testimonial.rating} star rating`}
+        >
           {[...Array(fullStars)].map((_, i) => (
             <Star
               key={`full-${i}`}
@@ -284,9 +323,15 @@ function TestimonialCard({ testimonial }: { testimonial: typeof testimonials[0] 
           ))}
           {hasHalfStar && (
             <div className="relative w-5 h-5">
-              <Star className="absolute w-5 h-5 text-yellow-400" aria-hidden="true" />
+              <Star
+                className="absolute w-5 h-5 text-yellow-400"
+                aria-hidden="true"
+              />
               <div className="absolute inset-0 overflow-hidden w-1/2">
-                <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" aria-hidden="true" />
+                <Star
+                  className="w-5 h-5 fill-yellow-400 text-yellow-400"
+                  aria-hidden="true"
+                />
               </div>
             </div>
           )}

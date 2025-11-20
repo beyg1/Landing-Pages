@@ -12,7 +12,7 @@
   --color-curtain-dark: var(--curtain-dark);
   --color-curtain-light: var(--curtain-light);
   --color-accent: var(--accent);
-  
+
   /* Font families */
   --font-display: var(--font-playfair);
   --font-sans: var(--font-inter);
@@ -46,7 +46,8 @@ body {
 }
 
 @keyframes float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
@@ -98,7 +99,7 @@ body {
 }
 
 .animate-scroll-rtl {
-  animation: scroll-rtl 15s linear infinite;
+  animation: scroll-rtl 60s linear infinite;
 }
 
 .animate-scroll-rtl:hover {
@@ -107,9 +108,9 @@ body {
 
 /* Hide scrollbar for mobile horizontal scroll */
 .scrollbar-hide {
-  -ms-overflow-style: none;  /* Internet Explorer 10+ */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
 }
 .scrollbar-hide::-webkit-scrollbar {
-  display: none;  /* Safari and Chrome */
+  display: none; /* Safari and Chrome */
 }
