@@ -8,7 +8,7 @@ const listings = [
   {
     id: 1,
     image:
-      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1581184875451-e4dc1ce0f88e?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb",
     title: "Modern Villa in Islamabad",
     location: "F-8, Islamabad",
     type: "For Sale",
@@ -21,7 +21,7 @@ const listings = [
   {
     id: 2,
     image:
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1642709441467-6816f4dec4af?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb",
     title: "Luxury Apartment in Karachi",
     location: "DHA Phase 8, Karachi",
     type: "For Sale",
@@ -34,7 +34,7 @@ const listings = [
   {
     id: 3,
     image:
-      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1629552441775-f348a18a391c?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb",
     title: "Commercial Plaza in Lahore",
     location: "Gulberg, Lahore",
     type: "For Rent",
@@ -47,7 +47,7 @@ const listings = [
   {
     id: 4,
     image:
-      "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb",
     title: "Farmhouse in Bahria Town",
     location: "Bahria Town, Rawalpindi",
     type: "For Sale",
@@ -73,7 +73,7 @@ const listings = [
   {
     id: 6,
     image:
-      "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1592589185394-1849d2e75d75?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb",
     title: "Corner Plot in DHA",
     location: "DHA Phase 6, Lahore",
     type: "For Sale",

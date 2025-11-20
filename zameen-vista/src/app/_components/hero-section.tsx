@@ -17,7 +17,7 @@ export function HeroSection() {
       {/* Background Image with Parallax Effect */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="https://images.unsplash.com/photo-1605146769289-440113cc3d00?auto=format&fit=crop&w=2000&q=75"
+          src="https://images.unsplash.com/photo-1686164748261-33e13eef70b6?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb"
           alt="Modern Pakistani architecture"
           fill
           priority
