@@ -86,7 +86,7 @@ const listings = [
 ];
 
 export function FeaturedListingsSection() {
-  const { ref, isVisible } = useReveal({ threshold: 0.2 });
+  const { ref, isVisible } = useReveal({ threshold: 0.05 });
 
   return (
     <section

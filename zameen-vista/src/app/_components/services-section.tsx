@@ -67,7 +67,7 @@ const services = [
 ];
 
 export function ServicesSection() {
-  const { ref, isVisible } = useReveal({ threshold: 0.2 });
+  const { ref, isVisible } = useReveal({ threshold: 0.05 });
 
   return (
     <section
