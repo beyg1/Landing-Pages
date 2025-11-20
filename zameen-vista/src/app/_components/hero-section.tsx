@@ -38,7 +38,7 @@ export function HeroSection() {
       </div>
 
       {/* Content Container */}
-      <div className="relative z-10 container mx-auto px-6 lg:px-12 py-32">
+      <div className="relative z-10 container mx-auto px-6 lg:px-12 pt-16 lg:pt-32 pb-32">
         <div className="max-w-7xl mx-auto">
           {/* Main Content - Asymmetric Layout */}
           <div className="grid lg:grid-cols-12 gap-12 items-center">
