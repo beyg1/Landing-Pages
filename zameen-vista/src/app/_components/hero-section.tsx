@@ -27,8 +27,8 @@ export function HeroSection() {
           }`}
         />
         {/* Multi-layer gradient overlay for depth */}
-        <div className="absolute inset-0 bg-linear-to-br from-curtain-dark/95 via-curtain-dark/70 to-transparent" />
-        <div className="absolute inset-0 bg-linear-to-t from-curtain-dark via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-br from-curtain-dark/80 via-curtain-dark/75 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-t from-curtain-dark/35 via-transparent to-transparent" />
       </div>
 
       {/* Animated gradient orbs for visual interest */}

@@ -111,7 +111,7 @@ export function ServicesSection() {
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
-            Everything you need for your real estate journey in Pakistan, backed by expert support
+            Everything you need for your real estate journey in Pakistan, backed by expert Agents
           </p>
         </div>
 
