@@ -2,12 +2,15 @@
 
 import { useEffect, useRef, useState } from "react";
 
-export function useReveal(options = { threshold: 0.1 }) {
+export function useReveal(options: IntersectionObserverInit & { enabled?: boolean } = { threshold: 0.1, enabled: true }) {
   const ref = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
   const observerRef = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
+    // If not enabled yet (e.g., loading), do not observe
+    if (options.enabled === false) return;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -30,7 +33,7 @@ export function useReveal(options = { threshold: 0.1 }) {
         observerRef.current.disconnect();
       }
     };
-  }, [options]);
+  }, [options.threshold, options.root, options.rootMargin, options.enabled]);
 
   return { ref, isVisible };
 }

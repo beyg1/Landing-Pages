@@ -3,9 +3,12 @@
 import Image from "next/image";
 import { useReveal } from "./use-reveal";
 import { useLenisInstance } from "./smooth-scroll-provider";
+import { useLoading } from "../_context/loading-context";
 
 export function HeroSection() {
-  const { ref, isVisible } = useReveal();
+  const { isLoading } = useLoading();
+  // Only enable reveal logic when loading is complete
+  const { ref, isVisible } = useReveal({ threshold: 0.1, enabled: !isLoading });
   const { scrollTo } = useLenisInstance();
 
   return (

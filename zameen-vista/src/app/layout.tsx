@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Playfair_Display, Inter } from "next/font/google";
 import Script from "next/script";
 import { SmoothScrollProvider } from "./_components/smooth-scroll-provider";
+import { LoadingProvider } from "./_context/loading-context";
+import { LoadingScreen } from "./_components/loading-screen";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -157,7 +159,10 @@ export default function RootLayout({
       <body
         className={`${playfair.variable} ${inter.variable} antialiased`}
       >
-        <SmoothScrollProvider>{children}</SmoothScrollProvider>
+        <LoadingProvider>
+          <LoadingScreen />
+          <SmoothScrollProvider>{children}</SmoothScrollProvider>
+        </LoadingProvider>
 
         {/* Google Analytics placeholder - replace with your GA4 ID */}
         {process.env.NEXT_PUBLIC_GA_ID && (
