@@ -1,204 +1,77 @@
-Welcome to your new TanStack Start app! 
+# TanStack Start for Next.js Developers ⚡️
 
-# Getting Started
+Welcome to TanStack Start! Since you already know Next.js (App Router), here is the ultra-concise cheat sheet to map your Next.js brain to TanStack Start.
 
-To run this application:
+## 📂 1. Routing & Files (The Big Difference)
 
-```bash
-pnpm install
-pnpm dev
-```
+TanStack Start uses **file-based routing**, but it's completely **Type-Safe**. Every time you create a route, `src/routeTree.gen.ts` is auto-generated. **Do not touch `routeTree.gen.ts`.**
 
-# Building For Production
+| Next.js App Router | TanStack Start (`src/routes/`) | Purpose |
+| :--- | :--- | :--- |
+| `app/layout.tsx` | `__root.tsx` | The global layout. Wraps the whole app. |
+| `app/page.tsx` | `index.tsx` | The home page (`/`). |
+| `app/about/page.tsx` | `about.tsx` | Static route (`/about`). |
+| `app/blog/[id]/page.tsx`| `blog/$id.tsx` | Dynamic route (`/blog/123`). |
 
-To build this application for production:
+*Notice the `$` instead of `[]` for dynamic routes.*
 
-```bash
-pnpm build
-```
+## ⚙️ 2. Server vs Client Components
 
-## Testing
+Next.js defaults to Server Components. TanStack Start defaults to **Client Components**, but uses a powerful `loader` pattern to fetch server data before the page renders (similar to Remix or Next.js Pages Router `getServerSideProps`).
 
-This project uses [Vitest](https://vitest.dev/) for testing. You can run the tests with:
+### How to fetch data (The TanStack Way)
 
-```bash
-pnpm test
-```
-
-## Styling
-
-This project uses [Tailwind CSS](https://tailwindcss.com/) for styling.
-
-### Removing Tailwind CSS
-
-If you prefer not to use Tailwind CSS:
-
-1. Remove the demo pages in `src/routes/demo/`
-2. Replace the Tailwind import in `src/styles.css` with your own styles
-3. Remove `tailwindcss()` from the plugins array in `vite.config.ts`
-4. Uninstall the packages: `pnpm add @tailwindcss/vite tailwindcss --dev`
-
-## Linting & Formatting
-
-This project uses [Biome](https://biomejs.dev/) for linting and formatting. The following scripts are available:
-
-
-```bash
-pnpm lint
-pnpm format
-pnpm check
-```
-
-
-
-## Routing
-
-This project uses [TanStack Router](https://tanstack.com/router) with file-based routing. Routes are managed as files in `src/routes`.
-
-### Adding A Route
-
-To add a new route to your application just add a new file in the `./src/routes` directory.
-
-TanStack will automatically generate the content of the route file for you.
-
-Now that you have two routes you can use a `Link` component to navigate between them.
-
-### Adding Links
-
-To use SPA (Single Page Application) navigation you will need to import the `Link` component from `@tanstack/react-router`.
+Instead of making the component `async`, you define a `loader` in the route definition.
 
 ```tsx
-import { Link } from "@tanstack/react-router";
-```
+// src/routes/services/$serviceId.tsx
+import { createFileRoute } from '@tanstack/react-router'
 
-Then anywhere in your JSX you can use it like so:
-
-```tsx
-<Link to="/about">About</Link>
-```
-
-This will create a link that will navigate to the `/about` route.
-
-More information on the `Link` component can be found in the [Link documentation](https://tanstack.com/router/v1/docs/framework/react/api/router/linkComponent).
-
-### Using A Layout
-
-In the File Based Routing setup the layout is located in `src/routes/__root.tsx`. Anything you add to the root route will appear in all the routes. The route content will appear in the JSX where you render `{children}` in the `shellComponent`.
-
-Here is an example layout that includes a header:
-
-```tsx
-import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
-
-export const Route = createRootRoute({
-  head: () => ({
-    meta: [
-      { charSet: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { title: 'My App' },
-    ],
-  }),
-  shellComponent: ({ children }) => (
-    <html lang="en">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        <header>
-          <nav>
-            <Link to="/">Home</Link>
-            <Link to="/about">About</Link>
-          </nav>
-        </header>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  ),
+export const Route = createFileRoute('/services/$serviceId')({
+  // 1. Fetch data on the server
+  loader: async ({ params }) => {
+    const data = await fetch(`https://api.example.com/services/${params.serviceId}`)
+    return data.json()
+  },
+  // 2. Render the component
+  component: ServicePage,
 })
+
+function ServicePage() {
+  // 3. Consume the data with 100% type safety
+  const data = Route.useLoaderData()
+  return <div>{data.name}</div>
+}
 ```
 
-More information on layouts can be found in the [Layouts documentation](https://tanstack.com/router/latest/docs/framework/react/guide/routing-concepts#layouts).
+## 🚀 3. Server Functions (RPC)
 
-## Server Functions
-
-TanStack Start provides server functions that allow you to write server-side code that seamlessly integrates with your client components.
+In Next.js you use Server Actions (`"use server"`).
+In TanStack Start, you use `createServerFn`. This creates an RPC endpoint automatically.
 
 ```tsx
 import { createServerFn } from '@tanstack/react-start'
 
-const getServerTime = createServerFn({
-  method: 'GET',
-}).handler(async () => {
-  return new Date().toISOString()
-})
-
-// Use in a component
-function MyComponent() {
-  const [time, setTime] = useState('')
-  
-  useEffect(() => {
-    getServerTime().then(setTime)
-  }, [])
-  
-  return <div>Server time: {time}</div>
-}
+const submitForm = createServerFn({ method: 'POST' })
+  .handler(async ({ data }) => {
+    // This runs securely on the server
+    await db.insert(data)
+    return { success: true }
+  })
 ```
 
-## API Routes
+## 🎨 4. Tailwind & Styling
 
-You can create API routes by using the `server` property in your route definitions:
+Tailwind CSS v4 is already configured. 
+- Global styles go in `src/styles.css`.
+- Just use standard Tailwind utility classes in your `.tsx` components.
 
-```tsx
-import { createFileRoute } from '@tanstack/react-router'
-import { json } from '@tanstack/react-start'
+---
 
-export const Route = createFileRoute('/api/hello')({
-  server: {
-    handlers: {
-      GET: () => json({ message: 'Hello, World!' }),
-    },
-  },
-})
-```
+## What we built in this project:
 
-## Data Fetching
+1. **`src/routes/index.tsx`**: A sleek Landing Page with Hero, Services, and CTA sections.
+2. **`src/routes/about.tsx`**: A static route example.
+3. **`src/routes/services/$serviceId.tsx`**: A dynamic route example.
 
-There are multiple ways to fetch data in your application. You can use TanStack Query to fetch data from a server. But you can also use the `loader` functionality built into TanStack Router to load the data for a route before it's rendered.
-
-For example:
-
-```tsx
-import { createFileRoute } from '@tanstack/react-router'
-
-export const Route = createFileRoute('/people')({
-  loader: async () => {
-    const response = await fetch('https://swapi.dev/api/people')
-    return response.json()
-  },
-  component: PeopleComponent,
-})
-
-function PeopleComponent() {
-  const data = Route.useLoaderData()
-  return (
-    <ul>
-      {data.results.map((person) => (
-        <li key={person.name}>{person.name}</li>
-      ))}
-    </ul>
-  )
-}
-```
-
-Loaders simplify your data fetching logic dramatically. Check out more information in the [Loader documentation](https://tanstack.com/router/latest/docs/framework/react/guide/data-loading#loader-parameters).
-
-# Demo files
-
-Files prefixed with `demo` can be safely deleted. They are there to provide a starting point for you to play around with the features you've installed.
-
-# Learn More
-
-You can learn more about all of the offerings from TanStack in the [TanStack documentation](https://tanstack.com).
-
-For TanStack Start specific documentation, visit [TanStack Start](https://tanstack.com/start).
+*Run `pnpm dev` to start the server at `http://localhost:3000`.*
