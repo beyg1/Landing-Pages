@@ -68,6 +68,54 @@ Tailwind CSS v4 is already configured.
 
 ---
 
+## ☁️ 5. Deploying to Cloudflare
+
+Deploying a TanStack Start app to Cloudflare Workers is extremely straightforward.
+
+**Step 1. Create an Account**
+Sign up at [Cloudflare Dashboard](https://dash.cloudflare.com) if you don't have an account.
+
+**Step 2. Install Dependencies**
+```bash
+pnpm add -D @cloudflare/vite-plugin wrangler
+```
+
+**Step 3. Configure Vite (`vite.config.ts`)**
+*Note: Even though TanStack Start uses Nitro (which can build for Cloudflare natively), we still need the `@cloudflare/vite-plugin`. Nitro handles the production build, but this Vite plugin allows your local `pnpm dev` server to simulate the Cloudflare runtime (Miniflare) so you can test KV/D1 databases locally!*
+
+Import the cloudflare plugin and add it to your plugins array:
+```ts
+import { cloudflare } from '@cloudflare/vite-plugin'
+
+export default defineConfig({
+  plugins: [
+    cloudflare({ viteEnvironment: { name: 'ssr' } }), // <--- Add this
+    tanstackStart(),
+  ],
+})
+```
+
+**Step 4. Update Scripts (`package.json`)**
+Add the deploy command replacing the default start command:
+```json
+"scripts": {
+  "preview": "vite preview",
+  "deploy": "pnpm run build && wrangler deploy",
+  "cf-typegen": "wrangler types"
+}
+```
+
+**Step 5. Authenticate & Deploy**
+```bash
+# 1. Login to your Cloudflare account (opens browser)
+npx wrangler login
+
+# 2. Deploy your application
+pnpm run deploy
+```
+
+---
+
 ## What we built in this project:
 
 1. **`src/routes/index.tsx`**: A sleek Landing Page with Hero, Services, and CTA sections.

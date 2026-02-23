@@ -5,6 +5,7 @@ import viteReact from "@vitejs/plugin-react";
 import { nitro } from "nitro/vite";
 import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
+import { cloudflare } from '@cloudflare/vite-plugin';
 
 const config = defineConfig({
 	plugins: [
@@ -12,6 +13,7 @@ const config = defineConfig({
 		nitro({ rollupConfig: { external: [/^@sentry\//] } }),
 		tsconfigPaths({ projects: ["./tsconfig.json"] }),
 		tailwindcss(),
+		cloudflare({ viteEnvironment: { name: 'ssr' } }),
 		tanstackStart(),
 		viteReact(),
 	],
