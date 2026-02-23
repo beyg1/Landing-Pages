@@ -95,7 +95,22 @@ export default defineConfig({
 })
 ```
 
-**Step 4. Update Scripts (`package.json`)**
+**Step 4. Create Wrangler Config (`wrangler.jsonc`)**
+Create a `wrangler.jsonc` file in the root of your project:
+```json
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "landing",
+  "compatibility_date": "2024-09-23",
+  "compatibility_flags": ["nodejs_compat"],
+  "main": "@tanstack/react-start/server-entry",
+  "assets": {
+    "directory": ".output/public"
+  }
+}
+```
+
+**Step 5. Update Scripts (`package.json`)**
 Add the deploy command replacing the default start command:
 ```json
 "scripts": {
@@ -105,7 +120,7 @@ Add the deploy command replacing the default start command:
 }
 ```
 
-**Step 5. Authenticate & Deploy**
+**Step 6. Authenticate & Deploy**
 ```bash
 # 1. Login to your Cloudflare account (opens browser)
 npx wrangler login
