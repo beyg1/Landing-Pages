@@ -1,3 +1,4 @@
+// Purpose: Vite build configuration. Registers TanStack Start, Tailwind, Nitro (server runtime), Cloudflare Workers, and React plugins.
 import tailwindcss from "@tailwindcss/vite";
 import { devtools } from "@tanstack/devtools-vite";
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";

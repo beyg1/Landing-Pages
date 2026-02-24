@@ -1,3 +1,4 @@
+// Purpose: The root layout wrapping every route. Equivalent to Next.js app/layout.tsx. Injects global fonts, stylesheets, meta tags, the Header, and devtools.
 import { TanStackDevtools } from "@tanstack/react-devtools";
 import { createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";

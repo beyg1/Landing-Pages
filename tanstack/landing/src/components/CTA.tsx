@@ -36,16 +36,18 @@ export default function CTA() {
 
 				{/* Action Controls */}
 				<div className="flex flex-col sm:flex-row gap-0 w-full sm:w-auto border border-steel bg-charcoal">
-					<button
-						type="button"
+					<a
+						href="https://mirza-dev.vercel.app/"
+						target="_blank"
+						rel="noopener noreferrer"
 						className="flex-1 relative group px-12 py-6 bg-toxic-green text-charcoal shrink-0 transition-transform active:scale-[0.98]"
 					>
 						{/* The harsh black scanline effect */}
 						<div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy5wMy5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSIyIiBmaWxsPSJyZ2JhKDAsMCwwLDAuMSkiLz4KPC9zdmc+')] opacity-20 pointer-events-none mix-blend-multiply"></div>
 						<span className="relative z-10 font-sans font-bold text-sm md:text-base tracking-[0.2em] uppercase w-full flex items-center justify-center">
-							Execute Build
+							Contact Dev
 						</span>
-					</button>
+					</a>
 
 					<button
 						type="button"

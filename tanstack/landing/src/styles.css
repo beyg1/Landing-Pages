@@ -1,3 +1,4 @@
+/* Purpose: Global design tokens and utility classes. Defines the "Industrial Monochrome & Neon" theme: custom fonts (Syne, JetBrains Mono, DM Sans), color palette (void, charcoal, steel, toxic-green), and background patterns (grid, dot matrix). */
 @import "tailwindcss";
 
 @theme {
