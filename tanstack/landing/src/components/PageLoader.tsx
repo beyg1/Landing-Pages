@@ -1,11 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Terminal } from "lucide-react";
+
+const MIN_DURATION_MS = 3000;
 
 export function PageLoader() {
 	const [loading, setLoading] = useState(true);
 	const [text, setText] = useState("");
 	const [progress, setProgress] = useState(0);
 	const [step, setStep] = useState(0);
+	const [fading, setFading] = useState(false);
+	const mountTime = useRef(Date.now());
 
 	const steps = [
 		"INITIALIZING KERNEL...",
@@ -15,24 +19,36 @@ export function PageLoader() {
 		"SYSTEM ONLINE",
 	];
 
+	// Dismiss loader only after minimum duration
+	const dismiss = () => {
+		const elapsed = Date.now() - mountTime.current;
+		const remaining = Math.max(0, MIN_DURATION_MS - elapsed);
+		setTimeout(() => {
+			setFading(true);
+			setTimeout(() => setLoading(false), 500); // fade-out duration
+		}, remaining);
+	};
+
 	useEffect(() => {
 		let currentStep = 0;
 
+		// Slower progress: ~3s to reach 100%
 		const progressInterval = setInterval(() => {
 			setProgress((p) => {
-				const newP = p + Math.random() * 20;
+				const newP = p + Math.random() * 8;
 				if (newP >= 100) return 100;
 				return newP;
 			});
-		}, 150);
+		}, 120);
 
+		// Each step lasts ~550ms → 5 steps ≈ 2.75s + typing fills the rest
 		const stepInterval = setInterval(() => {
 			currentStep++;
 			if (currentStep < steps.length) {
 				setStep(currentStep);
 				setText("");
 			}
-		}, 600);
+		}, 550);
 
 		return () => {
 			clearInterval(progressInterval);
@@ -44,19 +60,19 @@ export function PageLoader() {
 		let i = 0;
 		const currentText = steps[step];
 
-		// Typing effect for the current step
 		const typeInterval = setInterval(() => {
 			setText(currentText.slice(0, i));
 			i++;
 			if (i > currentText.length) {
 				clearInterval(typeInterval);
 
-				// If it's the last step and progress is done, finish loading
+				// Last step finished typing → begin dismiss (respects min duration)
 				if (step === steps.length - 1) {
-					setTimeout(() => setLoading(false), 800);
+					setProgress(100);
+					dismiss();
 				}
 			}
-		}, 25);
+		}, 30);
 
 		return () => clearInterval(typeInterval);
 	}, [step]);
@@ -64,7 +80,9 @@ export function PageLoader() {
 	if (!loading) return null;
 
 	return (
-		<div className="fixed inset-0 z-[100] bg-void bg-grid-white flex flex-col items-center justify-center font-mono overflow-hidden">
+		<div
+			className={`fixed inset-0 z-[100] bg-void bg-grid-white flex flex-col items-center justify-center font-mono overflow-hidden transition-opacity duration-500 ${fading ? "opacity-0" : "opacity-100"}`}
+		>
 			{/* Background Ambient Glow */}
 			<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vw] max-w-[500px] max-h-[500px] bg-toxic-green/5 blur-[120px] rounded-full pointer-events-none" />
 
