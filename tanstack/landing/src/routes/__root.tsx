@@ -4,6 +4,7 @@ import { createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 
 import Header from "../components/Header";
+import { PageLoader } from "../components/PageLoader";
 
 import appCss from "../styles.css?url";
 
@@ -51,6 +52,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 				<HeadContent />
 			</head>
 			<body>
+				<PageLoader />
 				<Header />
 				{children}
 				<TanStackDevtools
